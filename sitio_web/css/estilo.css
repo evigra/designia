@@ -1,5 +1,14 @@
-<!--				-->
+body, table, a
+{
+	text-decoration: 	none;
+	font-family: 	   	Verdana, Arial, comic sans ms, Helvetica, sans-serif;
+	text-decoration: 	none;
+	border-collapse: 	collapse;
+	color: 				gray;
+}
 
+
+/*
 *{
 	margin: 0;
 	padding: 0;
@@ -25,7 +34,7 @@
 	color: #CE7D35;
 	transition: all .15s;
 }
-/* Submenu*/
+
 .submenu{
 	position: absolute;
 	background: #333333;
@@ -45,7 +54,6 @@
 	visibility: visible;
 	opacity: 1;
 }
-<!--				-->
 
 .required
 {
@@ -162,7 +170,7 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	background: 		#A4A4A4;   
 	padding:    		3px 0px 3px 20px;
 	margin-left:    	0px;
-	/*font-weight: 		bold;*/
+	font-weight: 		bold;
 }
 
 
@@ -181,10 +189,6 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	width:				calc(100% - 50px);      
 	max-width: 			1100px;
 	min-height: 		350px;
-	/*
-	height:				-moz-calc(100% - 50px); 
-	height:				calc(100% - 50px);    
-	*/
 	border: 			1px solid grey;
 
 	-webkit-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
@@ -208,7 +212,6 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	border-radius: 		25px;
 }
 
-/* INICIO REPORTE CEBRA ############################################################ */
 table tr.odd,
 .odd {
 	height: 			30px;
@@ -226,7 +229,6 @@ table tr.odd:hover,
 	height: 			30px;
 	background: 		#AAA;
 }
-/* FIN REPORTE CEBRA ############################################################ */
 
 .formulario{
 	width: 				100%;
@@ -241,7 +243,6 @@ table tr.odd:hover,
 .msup{padding-top:	    10px;}
 .minf{padding-bottom:	10px;}
 
-/* INICIO GENERALES ############################################################ */
 body, table, a
 {
 	text-decoration: 	none;
@@ -277,7 +278,6 @@ body, table, a
 	cursor:           	pointer;
 }
 
-/* FIN GENERALES ############################################################ */
 
 
 
@@ -291,7 +291,7 @@ section {				margin: 20px;}
 .checkbox-2 {
 	width: 				84px;
 	height: 			24px;
-	/* background: 		rgba(0, 0, 0, 0.16); */
+	
 	border-radius: 		5px;
 	border:           	1px solid gray;
 	position: 			relative;	
@@ -317,7 +317,7 @@ section {				margin: 20px;}
 	line-height: 		25px;
 }
 .checkbox-2 label { 
-	background: 		#BE0000;    /* ROJO  */
+	background: 		#BE0000;    
 	display: 			block;
 	width: 				35px;
 	height: 			20px;
@@ -331,9 +331,10 @@ section {				margin: 20px;}
 }
 .checkbox-2 input[type=checkbox]:checked + label {
 	left: 				48px;
-	background: 		#14640B; 	/* VERDE  */
+	background: 		#14640B; 
 }
 .imgBox:hover 
 { 
 	cursor: 			pointer;
 } 
+*/
