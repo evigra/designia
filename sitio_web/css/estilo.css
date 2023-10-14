@@ -1,3 +1,10 @@
+:root 
+{
+	--altura_cabecera: 	150px;
+	--ancho_lateral: 	300px;
+	--ancho_contenido: 	750px;
+}
+
 body, table, a
 {
 	text-decoration: 	none;
@@ -7,6 +14,69 @@ body, table, a
 	color: 				gray;
 }
 
+#cabecera
+{
+	position:			absolute; 
+	left:				0; 
+	top:				0; 
+	width:				100%; 
+	height:				var(--altura_cabecera); 
+}
+.laterales{
+	position:			absolute; 	 
+	top:				var(--altura_cabecera); 
+	width:				var(--ancho_lateral);
+}
+.body_center
+{
+	position:			absolute; 
+	left:				var(--ancho_lateral); 
+	top:				var(--altura_cabecera);  
+	background-color:	#ccc; 
+	width: 				calc(100% - (var(--ancho_lateral) * 2));	
+}
+
+.contenido
+{
+	width:				var(--ancho_contenido); 
+	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
+	color:				#666; 
+	box-shadow: 		0 0 20px grey; 
+	border-radius: 		10px; 
+	background-color:	white;
+}
+
+.fotos
+{
+	float:				left; 
+	color:				black; 
+	border-radius: 		10px; 
+	margin:				5px; 
+	border-color: 		#bbb;
+	border-style: 		solid;
+	background-color:	gray;
+}
+
+.fotos1
+{
+	width:				calc(var(--ancho_contenido) - 50px); 
+	height:				calc(var(--ancho_contenido) * 0.60 ); 
+}
+.fotos2
+{
+	width:				calc((var(--ancho_contenido)/2) ); 
+	height:				calc((var(--ancho_contenido)/2) * 0.66 ); 
+}
+#galeria_fotos
+{
+	float:				left; 
+	width:				calc((var(--ancho_contenido)/4) * 0.92); 
+	height:				calc(((var(--ancho_contenido)/4) * 0.92) * 0.7);
+	color:				black; 
+	border-radius: 		10px; 
+	margin:				3px; 
+	background-color:	gray;	
+}
 
 /*
 *{
