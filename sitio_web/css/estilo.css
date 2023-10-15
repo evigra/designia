@@ -3,7 +3,43 @@
 	--altura_cabecera: 	150px;
 	--ancho_lateral: 	300px;
 	--ancho_contenido: 	850px;
+
+	--fondo_color1: 	#eee;
+	--fondo_color2: 	white;
+	--fondo_color3: 	gray;
 }
+
+
+/* ####################################### */
+/* ######      DESKTOP GRANDE       ###### */
+/* ####################################### */
+@media (min-width:1200px)
+{
+
+	font-size: 			5px;
+}
+
+
+/* ####################################### */
+/* ######      DESKTOP MEDIO        ###### */
+/* ####################################### */
+@media (max-width:1199px) and (min-width:992px)
+{
+
+	font-size: 			5px;
+}
+
+
+/* ####################################### */
+/* ######         TABLETS           ###### */
+/* ####################################### */
+@media (max-width:991px) 
+{
+	font-size: 			10px;
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Aldrich);
 
 body, table, a
 {
@@ -12,6 +48,10 @@ body, table, a
 	text-decoration: 	none;
 	border-collapse: 	collapse;
 	color: 				gray;
+}
+body{
+	background-color:	var(--fondo_color1);
+
 }
 
 #cabecera
@@ -26,13 +66,14 @@ body, table, a
 	position:			absolute; 	 
 	top:				var(--altura_cabecera); 
 	width:				var(--ancho_lateral);
+	background-color:	var(--fondo_color1);
 }
 .body_center
 {
 	position:			absolute; 
 	left:				var(--ancho_lateral); 
 	top:				var(--altura_cabecera);  
-	background-color:	#ccc; 
+	background-color:	var(--fondo_color1);
 	width: 				calc(100% - (var(--ancho_lateral) * 2));	
 }
 
@@ -43,7 +84,7 @@ body, table, a
 	color:				#666; 
 	box-shadow: 		0 0 20px grey; 
 	border-radius: 		10px; 
-	background-color:	white;
+	background-color:	var(--fondo_color2);
 }
 
 .fotos
@@ -54,7 +95,7 @@ body, table, a
 	margin:				5px; 
 	border-color: 		#bbb;
 	border-style: 		solid;
-	background-color:	gray;
+	background-color:	var(--fondo_color3);
 }
 
 .fotos1
@@ -75,7 +116,7 @@ body, table, a
 	color:				black; 
 	border-radius: 		10px; 
 	margin:				3px; 
-	background-color:	gray;	
+	background-color:	var(--fondo_color3);
 }
 
 /*
