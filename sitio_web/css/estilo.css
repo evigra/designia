@@ -9,14 +9,25 @@
 	--fondo_color3: 	gray;
 }
 
+.title{
+	font-size: 			25px;
+}
+.description{
+	font-size: 			18px;
+}
+
 
 /* ####################################### */
 /* ######      DESKTOP GRANDE       ###### */
 /* ####################################### */
 @media (min-width:1200px)
 {
-
-	font-size: 			5px;
+	.title{
+		font-size: 			25px;
+	}
+	.description{
+		font-size: 			18px;
+	}
 }
 
 
@@ -26,7 +37,12 @@
 @media (max-width:1199px) and (min-width:992px)
 {
 
-	font-size: 			5px;
+	.title{
+		font-size: 			25px;
+	}
+	.description{
+		font-size: 			18px;
+	}
 }
 
 
@@ -35,7 +51,12 @@
 /* ####################################### */
 @media (max-width:991px) 
 {
-	font-size: 			10px;
+	.title{
+		font-size: 			35px;
+	}
+	.description{
+		font-size: 			28px;
+	}
 }
 
 
