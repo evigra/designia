@@ -13,9 +13,7 @@
 	
 
 	$objeto->words["html_body"]				=$objeto->__VIEW_BASE("body", $objeto->words);
-
 	$events_data							=$objeto->__BROWSE();
-
 	foreach($events_data as $id =>$row)
 	{
 		$words_perfil=array(
@@ -44,8 +42,13 @@
 
 	$objeto->words["html_center"]			=$return;
 
+	$objeto->words["html_right1"]			="";
+	$objeto->words["html_right2"]			="";
+	$objeto->words["html_right3"]			="";
 
-	#$objeto->words["html_center"]			=$objeto->__BROWSE();
+	$objeto->words["html_left1"]			="";
+	$objeto->words["html_left2"]			="";
+	$objeto->words["html_left3"]			="";
 	
 	echo $objeto->__VIEW_BASE("index", $objeto->words);	
 ?>

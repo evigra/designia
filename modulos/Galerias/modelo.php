@@ -41,6 +41,7 @@
 				$words_event=array(
 					"events_id"				=>md5($row["event_id"]),
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos_" . random_int(1, 3), $words_perfil),					
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
 				);				

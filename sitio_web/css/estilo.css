@@ -4,73 +4,13 @@
 	--ancho_lateral: 	300px;
 	--ancho_contenido: 	850px;
 
-	--fondo_color1: 	#eee;
+	--fondo_color1: 	#174950;
 	--fondo_color2: 	white;
 	--fondo_color3: 	gray;
-}
 
-/* ####################################### */
-/* ######      DESKTOP GRANDE       ###### */
-/* ####################################### */
-@media (min-width:1200px)
-{
-	.title{
-		font-size: 			25px;
-	}
-	.subtitle{
-		font-size: 			20px;
-	}
-	
-	.description{
-		font-size: 			18px;
-	}
-	.subdescription{
-		font-size: 			14px;
-	}
-}
-
-
-/* ####################################### */
-/* ######      DESKTOP MEDIO        ###### */
-/* ####################################### */
-@media (max-width:1199px) and (min-width:992px)
-{
-
-	.title{
-		font-size: 			25px;
-	}
-	.subtitle{
-		font-size: 			20px;
-	}
-	
-	.description{
-		font-size: 			18px;
-	}
-	.subdescription{
-		font-size: 			14px;
-	}
-
-}
-
-
-/* ####################################### */
-/* ######         TABLETS           ###### */
-/* ####################################### */
-@media (max-width:991px) 
-{
-	.title{
-		font-size: 			45px;
-	}
-	.subtitle{
-		font-size: 			28px;
-	}
-	
-	.description{
-		font-size: 			35px;
-	}
-	.subdescription{
-		font-size: 			23px;
-	}
+	--fuente_color1: 	gray;
+	--fuente_color2: 	#174950;
+	--fuente_color3: 	#174950;
 }
 
 
@@ -86,11 +26,14 @@ body, table, a
 }
 body{
 	background-color:	var(--fondo_color1);
-
 }
 
 #cabecera
 {
+	/*
+	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
+	*/
+	margin: 			calc(var(--altura_cabecera) - 25px ) auto; 
 	position:			absolute; 
 	left:				0; 
 	top:				0; 
@@ -153,6 +96,68 @@ body{
 	margin:				3px; 
 	background-color:	var(--fondo_color3);
 }
+
+.title{
+	font-size: 			25px;
+	color:				var(--fuente_color1)
+}
+.subtitle{
+	font-size: 			20px;
+	color:				var(--fuente_color1)
+}	
+.description{
+	font-size: 			18px;
+	color:				var(--fuente_color1)
+}
+.subdescription{
+	font-size: 			14px;
+	color:				var(--fuente_color1)
+}
+
+/* ####################################### */
+/* ######      DESKTOP MEDIO        ###### */
+/* ####################################### */
+@media (max-width:1199px) and (min-width:992px)
+{
+
+	.title{
+		font-size: 			25px;
+	}
+	.subtitle{
+		font-size: 			20px;
+	}
+	
+	.description{
+		font-size: 			18px;
+	}
+	.subdescription{
+		font-size: 			14px;
+	}
+}
+
+
+/* ####################################### */
+/* ######         TABLETS           ###### */
+/* ####################################### */
+@media (max-width:991px) 
+{
+	.title{
+		font-size: 			45px;
+	}
+	.subtitle{
+		font-size: 			28px;
+	}
+	
+	.description{
+		font-size: 			35px;
+	}
+	.subdescription{
+		font-size: 			23px;
+	}
+}
+
+
+
 
 /*
 *{
