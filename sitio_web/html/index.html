@@ -7,8 +7,29 @@
         <meta charset="UTF-8">
 
         <link rel="stylesheet" type="text/css" href="../sitio_web/css/estilo.css">
+
+        <meta property="og:url"           content="https://{user}.{server}/{path}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="{html_head_title}" />
+        <meta property="og:description"   content="{html_head_description}" />
+        <!--
+        <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+        -->
+        
     </head>
     <body>
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0&appId=1759620497626721" nonce="2BmnNXWv"></script>      
+      
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+
       <form action="" method="POST" enctype="multipart/form-data">	
         {html_body}  
 

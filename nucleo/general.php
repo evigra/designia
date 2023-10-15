@@ -6,6 +6,12 @@
 		##############################################################################		
 		public function __CONSTRUCT()
 		{			
+			$this->words["server"]	=$_REQUEST["server"];
+			$this->words["user"]	=$_REQUEST["user"];
+			$this->words["path"]	=$_REQUEST["path"];
+
+		
+	
 		}
 		##############################################################################		 		
 		public function __BROWSE()
