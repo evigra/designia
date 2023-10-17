@@ -16,8 +16,6 @@
 
 			if(isset($_FILES["files"]))
 			{	
-				
-
 				$comando_sql	="INSERT INTO events (user_id, type, datetime_show, datetime, title, description)
 					VALUES( 
 						'1', 
@@ -40,10 +38,14 @@
 							{
 								$vdata			=explode(".", $data);
 
-								$comando_sql	="INSERT INTO files (event_id,user_id,extension)
-								VALUES(	'$events_id', '1', '" . $vdata[count($vdata)-1] ."')";
-
-								$file_id	=$this->__EXECUTE($comando_sql);					
+								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp)
+								VALUES(	
+									'$events_id', 
+									'1', 
+									'" . $vdata[count($vdata)-1] ."',
+									'" . $_FILES["files"]["tmp_name"][$row] . "'
+								)";
+								$file_id								=$this->__EXECUTE($comando_sql);					
 								$this->__FILES_DATA[$row]["id"]			=$file_id;
 								$this->__FILES_DATA[$row]["extension"]	=$vdata[count($vdata)-1];
 								$this->__FILES_DATA[$row]["copiado"]	=0;
@@ -51,8 +53,7 @@
 							$this->__FILES_DATA[$row][$field]=$data;
 						}	
 					}
-				}
-				
+				}				
 				$this->__FILES_COPI();
 				
 			}
@@ -70,7 +71,6 @@
 					if(move_uploaded_file($file["tmp_name"], $archivo))
 					{
 						$this->__FILES_DATA[$row]["copiado"]=1;
-
 					}					
 				}
 			}

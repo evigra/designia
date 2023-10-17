@@ -12,8 +12,6 @@
 		public function __CONSTRUCT($option=null)
 		{	
 			parent::__CONSTRUCT($option);
-
-
 		}
 		public function __BROWSE()
     	{
@@ -22,18 +20,14 @@
 			$usuarios		=array();
 
 			$comando_sql	="
-				SELECT *, 
-					e.id as event_id 
+				SELECT *, e.id as event_id 
 				FROM 
 					events e JOIN 
 					user u ON e.user_id=u.id 
 			";
-			
 			$events=$this->__EXECUTE($comando_sql);
-
 			foreach($events as $id =>$row)
 			{
-
 				$words_perfil				=$this->__PERFIL_DATA($row);
 				$words_event=array(
 					"events_id"				=>md5($row["event_id"]),
@@ -59,10 +53,7 @@
 					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
 					$words_event["foto".$rows]=$archivo;
 					$rows++;
-				}
-
-
-				
+				}				
 				$return	.=$this->__VIEW_BASE("contenido", $words_event);
 			}
 			return $return;

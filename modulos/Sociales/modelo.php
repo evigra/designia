@@ -28,6 +28,7 @@
 					events e JOIN 
 					user u ON e.user_id=u.id 
 				WHERE type='" . $_REQUEST["class"]. "'
+				ORDER by e.id DESC
 			";
 			
 			$events=$this->__EXECUTE($comando_sql);
