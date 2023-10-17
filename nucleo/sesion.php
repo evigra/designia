@@ -16,11 +16,20 @@
 		$vdatos								=explode(":", $_REQUEST["datos"]);
 		$_REQUEST["user"]					=$vdatos[0];
 
-		if($vdatos[1]!="")	$_REQUEST["path"]=$vdatos[1];
-		else 				$_REQUEST["path"]="Events/";
+		if($vdatos[1]=="")					$vdatos[1]="Portada/Show/";
+		if($vdatos[1]!="")	
+		{
+			$vpath							=explode("/", $vdatos[1]);	
+			#if(count($vpath)>1)
+			{
+				$_REQUEST["path"]			=$vpath[0] . "/";
+				$_REQUEST["method"]			=$vpath[1];
+				$_REQUEST["class"]			=$vpath[0];
+			}
+		}
 
-		$vpath=explode("/", $_REQUEST["path"]);
-		$_REQUEST["class"]=$vpath[0];
+		#$vpath=explode("/", $_REQUEST["path"]);
+		#$_REQUEST["class"]=$vpath[0];
 
 		$vserver=explode(".", $_SERVER["HTTP_HOST"]);
 		$_REQUEST["server"]	=$vserver[1] . "." .$vserver[2];

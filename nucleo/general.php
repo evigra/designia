@@ -5,14 +5,79 @@
 		##  Metodos	
 		##############################################################################		
 		public function __CONSTRUCT()
-		{			
-			$this->words["server"]	=$_REQUEST["server"];
-			$this->words["user"]	=$_REQUEST["user"];
-			$this->words["path"]	=$_REQUEST["path"];
+		{		
+			$files_available				=array("image/png","image/jpeg");
 
-		
-	
+			$this->words["server"]			=$_REQUEST["server"];
+			$this->words["user"]			=$_REQUEST["user"];
+			$this->words["path"]			=$_REQUEST["path"];
+			$this->__FILES_DATA				=array();	
+			$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);
+
+			if(isset($_FILES["files"]))
+			{	
+				
+
+				$comando_sql	="INSERT INTO events (user_id, type, datetime_show, datetime, title, description)
+					VALUES( 
+						'1', 
+						'" . $_REQUEST["class"]. "',
+						'" . date("Y-m-d H:i:s") . "',
+						'" . date("Y-m-d H:i:s"). "',
+						'" . $_REQUEST["title"]. "',
+						'" . $_REQUEST["description"]. "'
+					)
+				";
+				$events_id			=$this->__EXECUTE($comando_sql);	
+
+				foreach($_FILES["files"] as $field => $values)
+				{		        
+					foreach($values as $row => $data) 
+					{
+						if(in_array($_FILES["files"]["type"][$row], $files_available))
+						{
+							if($field=="name")
+							{
+								$vdata			=explode(".", $data);
+
+								$comando_sql	="INSERT INTO files (event_id,user_id,extension)
+								VALUES(	'$events_id', '1', '" . $vdata[count($vdata)-1] ."')";
+
+								$file_id	=$this->__EXECUTE($comando_sql);					
+								$this->__FILES_DATA[$row]["id"]			=$file_id;
+								$this->__FILES_DATA[$row]["extension"]	=$vdata[count($vdata)-1];
+								$this->__FILES_DATA[$row]["copiado"]	=0;
+							}						
+							$this->__FILES_DATA[$row][$field]=$data;
+						}	
+					}
+				}
+				
+				$this->__FILES_COPI();
+				
+			}
 		}
+		public function __FILES_COPI()
+    	{    	
+			foreach($this->__FILES_DATA as $row=>$file)
+			{
+				if($file["copiado"]==0)
+				{
+					$path="modulos/files/file/";
+					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
+					//move_uploaded_file($file["tmp_name"], $path . $this->__FILES_DATA[$row]["id"] . "." . $this->__FILES_DATA[$row]["extension"]);
+					
+					if(move_uploaded_file($file["tmp_name"], $archivo))
+					{
+						$this->__FILES_DATA[$row]["copiado"]=1;
+
+					}					
+				}
+			}
+
+		}		
+
+
 		##############################################################################		 		
 		public function __BROWSE()
     	{    	
@@ -55,6 +120,8 @@
 			if(is_object($this->OPHP_conexion)) 
 			{
 				$resultado	= @$this->OPHP_conexion->query($comando_sql);
+
+				
 				
 				if(isset($this->OPHP_conexion->error)  AND $this->OPHP_conexion->error!="")
 				{					
@@ -78,11 +145,9 @@
 			if(is_object(@$resultado)) 
 			{			
 				while($datos = $resultado->fetch_assoc())
-				{			
-				
+				{							
 					foreach($datos as $field =>$value)
 					{
-					
 						if(is_string($field) AND !is_null($field))
 						{
 							#$value 					= html_entity_decode($value);
@@ -93,6 +158,11 @@
 				}
 				$resultado->free();					
 			}
+
+			if(substr($comando_sql, 0, 6)=="INSERT")
+				$return	=$this->OPHP_conexion->insert_id;
+			
+			#
 
 			$this->__MESSAGE_EXECUTE="";
     		if(is_array($option))

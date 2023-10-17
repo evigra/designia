@@ -1,4 +1,5 @@
 <?php
+	
 	require_once("nucleo/sesion.php");	
 	require_once("nucleo/basededatos.php");	
 	require_once("nucleo/auxiliar.php");	
@@ -16,9 +17,12 @@
 		echo "ERROR";
 	
 
-	/*
+	#/*
 	echo "<pre>";
-	print_r($_REQUEST);
+	#print_r($_REQUEST);
+	#print_r($_FILES);
+	print_r($objeto->__FILES_DATA);
+	
 	echo "</pre>";
 	#*/
 ?>
