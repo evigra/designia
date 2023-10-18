@@ -6,6 +6,7 @@
 	
 	$objeto->words["html_head_description"]	="Esta descripcion";
 	$objeto->words["html_head_keywords"]	="Designia, Designia.vip, Eventos, events";
+	$objeto->words["html_create"]				="";
 	
 	$objeto->words["html_body"]				=$objeto->__VIEW_BASE("body", $objeto->words);
 

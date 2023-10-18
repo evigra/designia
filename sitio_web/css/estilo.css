@@ -20,24 +20,23 @@ body, table, a
 body{
 	background-color:	var(--fondo_color1);
 }
-.formulario{
-	width: 				100%;
-	box-sizing:			border-box;
-	border-radius:		6px;
-	height:				30px;
-}
 
 #cabecera
 {
 	/*
 	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
-	*/
 	margin: 			calc(var(--altura_cabecera) - 25px ) auto; 
-	position:			absolute; 
+	height:				var(--altura_cabecera); 
+	
+	*/
+	padding: 			13px; 
+	position:			fixed; 
 	left:				0; 
 	top:				0; 
 	width:				100%; 
-	height:				var(--altura_cabecera); 
+	z-index: 			1;
+	
+	
 }
 .laterales{
 	position:			absolute; 	 
@@ -45,25 +44,7 @@ body{
 	width:				var(--ancho_lateral);
 	background-color:	var(--fondo_color1);
 }
-.body_center
-{
-	position:			absolute; 
-	left:				var(--ancho_lateral); 
-	top:				var(--altura_cabecera);  
-	background-color:	var(--fondo_color1);
-	width: 				calc(100% - (var(--ancho_lateral) * 2));	
-}
-#pie
-{
-	/*
-	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
-	*/
-	position:			static; 
-	left:				0; 
-	bottom:				10; 
-	width:				100%; 
 
-}
 .contenido
 {
 	width:				var(--ancho_contenido); 
@@ -92,7 +73,7 @@ body{
 }
 .fotos2
 {
-	width:				calc((var(--ancho_contenido)/2) ); 
+	width:				calc((var(--ancho_contenido)/2) * 0.90); 
 	height:				calc((var(--ancho_contenido)/2) * 0.66 ); 
 }
 #galeria_fotos
@@ -106,67 +87,44 @@ body{
 	background-color:	var(--fondo_color3);
 }
 
-.title{
-	font-size: 			25px;
-	color:				var(--fuente_color1)
-}
-.subtitle{
-	font-size: 			20px;
-	color:				var(--fuente_color1)
-}	
-.description{
-	font-size: 			18px;
-	color:				var(--fuente_color1)
-}
-.subdescription{
-	font-size: 			14px;
-	color:				var(--fuente_color1)
+h4, h3, h2, h1{
+	margin:				0px;
 }
 
-/* ####################################### */
-/* ######      DESKTOP MEDIO        ###### */
-/* ####################################### */
-@media (max-width:1199px) and (min-width:992px)
+
+
+
+/*
+@media (min-width:450px) 
 {
-
-	.title{
-		font-size: 			25px;
+	.horizontal
+	{
+		visibility: 		hidden;
 	}
-	.subtitle{
-		font-size: 			20px;
-	}
-	
-	.description{
-		font-size: 			18px;
-	}
-	.subdescription{
-		font-size: 			14px;
+	.vertical
+	{
+		visibility:			visible;
+	}	
+	a{
+		font-size:			30px; 
 	}
 }
-
-
-/* ####################################### */
-/* ######         TABLETS           ###### */
-/* ####################################### */
-@media (max-width:991px) 
+@media (max-width:449px) 
 {
-	.title{
-		font-size: 			45px;
+	.horizontal
+	{
+		visibility: visible;
 	}
-	.subtitle{
-		font-size: 			28px;
-	}
-	
-	.description{
-		font-size: 			35px;
-	}
-	.subdescription{
-		font-size: 			23px;
+	.vertical
+	{
+		visibility:			hidden;
+	}	
+
+	a{
+		font-size:			15px; 
 	}
 }
-
-
-
+*/
 
 /*
 *{

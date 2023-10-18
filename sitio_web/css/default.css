@@ -13,4 +13,41 @@
 	--fuente_color3: 	#174950;
 
 }
+#body_center
+{
+	z-index:			20; 
+	position:			absolute; 
+	top:				50px; 
+	width:				100%;
+}
 
+
+
+
+@media (orientation: portrait)
+{
+	a{
+		font-size:			30px; 
+	}
+	.formulario{
+		font-size:			25px; 
+		width: 				100%;
+		box-sizing:			border-box;
+		border-radius:		6px;
+		height:				50px;
+	}
+	
+}
+@media (orientation:landscape)
+{
+	a{
+		font-size:			15px; 
+	}
+	.formulario{
+		width: 				100%;
+		box-sizing:			border-box;
+		border-radius:		6px;
+		height:				30px;
+	}
+	
+}

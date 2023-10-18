@@ -16,7 +16,7 @@
 		$vdatos								=explode(":", $_REQUEST["datos"]);
 		$_REQUEST["user"]					=$vdatos[0];
 
-		if($vdatos[1]=="")					$vdatos[1]="Portada/Show/";
+		if(@$vdatos[1]=="")					$vdatos[1]="Portada/Show/";
 		if($vdatos[1]!="")	
 		{
 			$vpath							=explode("/", $vdatos[1]);	
@@ -28,21 +28,30 @@
 			}
 		}
 
-		#$vpath=explode("/", $_REQUEST["path"]);
-		#$_REQUEST["class"]=$vpath[0];
-
+		if($_REQUEST["user"]=="Sociales/Show/" and $_SERVER["HTTP_HOST"]=="designia.vip")
+		{	
+			$_REQUEST["user"]="wwww";			
+			$_SERVER["HTTP_HOST"]="http://".$_REQUEST["user"] .".". $_SERVER["HTTP_HOST"];
+			Header ("Location: {$_SERVER["HTTP_HOST"]}");			
+		}
+		if($_REQUEST["user"]=="Sociales/Show/" and $_SERVER["HTTP_HOST"]=="designia.localhost")
+		{			
+			$_REQUEST["user"]="wwww";	
+			$_SERVER["HTTP_HOST"]="http://".$_REQUEST["user"] .".". $_SERVER["HTTP_HOST"];		
+			Header ("Location: {$_SERVER["HTTP_HOST"]}");
+		}
 		$vserver=explode(".", $_SERVER["HTTP_HOST"]);
 		$_REQUEST["server"]	=$vserver[1] . "." .$vserver[2];
 
 		unset($_REQUEST["datos"]);
 	}
 	
-
 	if(!isset($_SESSION))		$_SESSION=array();
 	
 	if(isset($_SESSION))
 	{
 
+		
 		if(!isset($_SESSION["var"]))			$_SESSION["var"]					=array();
 						
 		$_SESSION["var"]["false"]			=array(0,"0","false", "no");
@@ -54,8 +63,8 @@
 		if(@$_GET["sys_action"]=="cerrar_sesion")
 		{
 			session_destroy();
-			$destino= "../sesion/";	
-			Header ("Location: $destino");			
+			//$destino= "designia.vip";	
+			Header ("Location: http://{$_REQUEST["server"]}/Sociales/Show/");			
 		}	
 	}
 	$pre_path="";	

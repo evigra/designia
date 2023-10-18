@@ -1,6 +1,7 @@
 <?php
 	$objeto			=new sesion();
 
+	$objeto->words["html_create"]			="";	
 	$objeto->words["html_head_css"]			="default";
 	$objeto->words["html_head_title"]		.="Iniciar Sesion";
 	
@@ -11,7 +12,7 @@
 
 	$objeto->words["html_left"]				="";
 	
-	$objeto->words["html_center"]			=$objeto->__VIEW_MODULE("contenido");
+	$objeto->words["html_center"]			=$objeto->__VIEW_MODULE("contenido", $objeto->words);
 	$objeto->words["html_right"]			="";
 
 	$objeto->words["html_menu"]				=$objeto->__VIEW_BASE("menu", $objeto->words);

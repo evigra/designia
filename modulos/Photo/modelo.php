@@ -1,0 +1,115 @@
+<?php
+	class event extends general
+	{   
+		##############################################################################	
+		##  Propiedades	
+		##############################################################################
+
+		##############################################################################	
+		##  Metodos	
+		##############################################################################
+         
+		public function __CONSTRUCT($option=null)
+		{	
+			return parent::__CONSTRUCT($option);
+		}
+   		public function __BROWSE()
+    	{
+			$words_event=array(
+				"events_title"			=>"Este es el titulo del evento",
+				"events_description"	=>"Aqui apareceria la descipcion del evento",
+				"events_photos"			=>"ESTAS INGREADO UNA URL QUE NO EXISTE",
+			);
+			$return	=$this->__VIEW_BASE("galeria", $words_event);
+			$user_ids		="";
+			$usuarios		=array();
+
+			$comando_sql	="
+				SELECT *, 
+					e.id as event_id,
+					f.id as file_id
+				FROM 
+					events e JOIN 
+					files f ON e.id=f.event_id JOIN
+					user u ON e.user_id=u.id 
+				WHERE
+					MD5(e.id)='$_REQUEST[event]' 
+					#AND MD5(f.id)='$_REQUEST[file]'
+
+			";
+			$files=$this->__EXECUTE($comando_sql);
+			
+			if($files)
+			{
+				$return	="";	
+				foreach($files as $id =>$row)
+				{
+					$path="../../modulos/files/file/";
+					$md5_file=md5($row["file_id"]);
+
+					$archivo 	="";
+
+					if($_REQUEST["file"]==$md5_file)
+					{
+						$archivo 	=$path . "file_$md5_file." . $row["extension"];
+						$photo	="<img src=\"$archivo\" width=\"100%\">";
+					}						
+					$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
+					$archivo	="<img src=\"$archivo\">";	
+
+					$words_perfil				=$this->__PERFIL_DATA($row);
+				
+
+
+
+					$title="";
+					if($row["title"]!="")		
+					{
+						$title					="<h4>{$row["title"]}</h4>";
+		
+						$title_url				=str_replace(" ", "_", $row["title"]);   
+						$title_url				=urlencode($title_url);
+						$title_url				=str_replace("%", "_", $title_url);
+						$title_url				=str_replace("/", "_", $title_url);					
+					}
+					else	$title_url			="Evento ";
+		
+
+
+
+					$words_template=array(
+						#"events_title"			=>$row["title"],
+						#"events_description"	=>$row["description"],
+						"evento" 				=>$_REQUEST["event"],
+						"index"					=>$id,
+						"events_title"			=>$title,
+						"events_title_url"		=>$title_url,
+	
+					);		
+
+
+
+
+					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
+					
+					$words_file=array(						
+						"foto$id" => $archivo,
+						"file$id" => $md5_file
+					);
+					$return		=$this->__REPLACE($return,$words_file);
+				}
+
+				$words_event=array(
+					"events_title"			=>$row["title"],
+					"events_description"	=>$row["description"],
+					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photo"			=>$photo,	
+					"events_photos"			=>$return,
+				);
+
+				$return	=$this->__VIEW_BASE("galeria", $words_event);
+			}
+			return $return;
+		}
+	}
+?>

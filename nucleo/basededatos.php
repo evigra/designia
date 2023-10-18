@@ -3,12 +3,30 @@
 	{    
 		public function __SYS_DB()
 		{  
+			if($this->words["server"]=="designia.localhost")
+			{
+				$host	="localhost";
+				$db		="produccion";
+			}
+			if($this->words["server"]=="designia.vip")
+			{
+				if($this->words["user"]=="developer")
+				{
+					$host	="localhost";
+					$db		="developer";
+				}
+				if($this->words["user"]!="developer")
+				{
+					$host	="localhost";
+					$db		="produccion";
+				}
+			}			
+
 			return array(
 				"user"		=>"remoto",
 				"pass"		=>"EvG30JiC06",
-				"name"		=>"produccion",
-				"host"		=>"solesgps.com",
-				"host"		=>"localhost",
+				"name"		=>$db,
+				"host"		=>$host,
 				"type"		=>"mysql",
 			);
 		}
@@ -46,10 +64,9 @@
 
 		public function __PRINT_R($variable)
 		{  
-		    echo "<div class=\"developer\" title=\"Sistema :: {$this->sys_object} {$this->sys_name}\"><pre>";
+		    echo "<div class=\"developer\" title=\"Sistema\"><pre>";
 		    @print_r(@$variable);
 		    echo "</pre></div>";		    			
     	} 
-
 	}
 ?>

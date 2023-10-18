@@ -14,24 +14,15 @@
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="{html_head_title}" />
         <meta property="og:description"   content="{html_head_description}" />
+
+        <link rel="icon" href="../../icono.png" type="image/x-icon">
+        <script src="../../sitio_web/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <!--
         <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
         -->
         
     </head>
     <body>
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0&appId=1759620497626721" nonce="2BmnNXWv"></script>      
-      
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-
       <form action="" method="POST" enctype="multipart/form-data">	
         {html_body}  
       </form>
@@ -50,14 +41,141 @@
             $("font#accion").button()
               .click(function()
               {				
-                $("form").submit();		        
+                $(this).attr('disabled', true);
+                $(this).html('Cargando'); 
+                
+                //$(this).prop('disabled', true);
+                //$(this).prop('text', 'algo');
+                //$(this).value('Emviando Datos');        
+                $("form").submit();		
               }
-            );			    
+            );		
+            
+                        
           }	    
+
+
+
+
+          
+          function varias(active, next)
+          {
+
+            $(active)              
+            .css( "zIndex", 10 )
+            .animate({
+              opacity: '0.01'
+            }, 2000);
+
+            $(next)              
+            .css( "zIndex", 1 )
+            .animate({
+              opacity: '1'
+            }, 2000);
+
+            var active  =$(next);
+            var next    =$(active).next();
+
+            //varias(active, next);
+
+          }
+
+          
+          if($(".portada").length>0)
+          {
+
+
+            var active  =$(".portada").first();
+            var next    =$(active).next();
+            varias(active, next);
+
+         
+          }
+
+
+          if($("div.developer").length>0)
+          {
+            $("div.developer").dialog();
+          }	    
+
+
+
+
+          $("div.cargar ").on( "click", function() {
+            
+
+            tinymce.init({
+              selector: 'textarea',
+              height: 250,
+              menubar: false,
+              language: 'es',          
+              plugins: [
+                'advlist autolink lists link charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar: 'undo redo | bold italic backcolor | ' +
+              'alignleft aligncenter alignright alignjustify |' +
+              ' outdent indent | removeformat ',
+              
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            });
+    
+
+          } );
+
+
+
+
+
+
         });
 
+
+
+
+
+
+
+
+
+
+
+
+        
       </script>
 
+
+      
+      
+        
+      <script>
+
+        
+        /*
+        tinymce.init({
+          selector: 'textarea',
+          height: 250,
+          menubar: false,
+          language: 'es',
+          
+          plugins: [
+            'advlist autolink lists link image code charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar: 'undo redo | image code | formatselect | ' +
+          'bold italic backcolor | alignleft aligncenter ' +
+          'alignright alignjustify | bullist numlist outdent indent | ' +
+          'removeformat ',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+          content_langs: [
+          { title: 'Spanish', code: 'es' },
+        ]          
+        });
+          */
+
+      </script>
 
 
     </body>    
