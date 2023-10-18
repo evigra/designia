@@ -20,6 +20,12 @@ body, table, a
 body{
 	background-color:	var(--fondo_color1);
 }
+.formulario{
+	width: 				100%;
+	box-sizing:			border-box;
+	border-radius:		6px;
+	height:				30px;
+}
 
 #cabecera
 {
