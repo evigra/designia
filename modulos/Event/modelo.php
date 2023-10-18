@@ -8,7 +8,7 @@
 		##############################################################################	
 		##  Metodos	
 		##############################################################################
-        
+         
 		public function __CONSTRUCT($option=null)
 		{	
 			return parent::__CONSTRUCT($option);
@@ -26,7 +26,8 @@
 
 			$comando_sql	="
 				SELECT *, 
-					e.id as event_id 
+					e.id as event_id,
+					f.id as file_id
 				FROM 
 					events e JOIN 
 					files f ON e.id=f.event_id 
@@ -40,13 +41,20 @@
 				$return	="";	
 				foreach($files as $id =>$row)
 				{
+					$path="../../modulos/files/file/";
+					$archivo =$path . "file_" . md5($row["file_id"]) . "." . $row["extension"];
+
 					$words_files=array(
 						"events_title"			=>$row["title"],
 						"events_description"	=>$row["description"],
-					);
-									
-					$return	.=$this->__VIEW_BASE("fotos", $words_files);
+						"index"					=>$id
+					);		
+					$return		.=$this->__VIEW_MODULE("fotos", $words_files);
+					$return		=$this->__REPLACE($return,array("foto$id" => $archivo));
 				}
+
+				#$this->__PRINT_R($return);
+
 				$words_event=array(
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
