@@ -32,7 +32,8 @@
 					events e JOIN 
 					files f ON e.id=f.event_id 
 				WHERE
-					MD5(e.id)='$_REQUEST[event]'
+					MD5(e.id)='$_REQUEST[event]' 
+					AND MD5(f.id)='$_REQUEST[file]'
 
 			";
 			$files=$this->__EXECUTE($comando_sql);
