@@ -30,7 +30,8 @@
 					f.id as file_id
 				FROM 
 					events e JOIN 
-					files f ON e.id=f.event_id 
+					files f ON e.id=f.event_id JOIN
+					user u ON e.user_id=u.id 
 				WHERE
 					MD5(e.id)='$_REQUEST[event]' 
 					AND MD5(f.id)='$_REQUEST[file]'
@@ -45,6 +46,7 @@
 					$path="../../modulos/files/file/";
 					$md5_file=md5($row["file_id"]);
 					$archivo =$path . "file_$md5_file." . $row["extension"];
+					$words_perfil				=$this->__PERFIL_DATA($row);
 
 					$words_template=array(
 						"events_title"			=>$row["title"],
@@ -67,6 +69,7 @@
 				$words_event=array(
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
+					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photos"			=>$return,
 				);
 

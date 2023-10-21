@@ -12,8 +12,6 @@
 		public function __CONSTRUCT($option=null)
 		{	
 			parent::__CONSTRUCT($option);
-
-
 		}
 		public function __BROWSE()
     	{
@@ -35,6 +33,8 @@
 
 			foreach($events as $id =>$row)
 			{
+				if($row["title"]!="")		$row["title"]		="<h4>{$row["title"]}</h4>";
+				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
 
 				$words_perfil				=$this->__PERFIL_DATA($row);
 				$words_event=array(
@@ -44,7 +44,6 @@
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
 				);				
-
 				$comando_sql	="
 					SELECT * FROM files
 					WHERE event_id='" . $row["event_id"]. "'
@@ -73,10 +72,6 @@
 							</video> 							
 					  	";													
 					}
-
-					#$words_event["foto".$rows]=$archivo;
-
-					#$words_event["archivo".$rows]=$archivo;
 					$rows++;
 				}
 

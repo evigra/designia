@@ -3,13 +3,12 @@
   <table width="100%" border="0" style="border-radius: 10px 0px 0px 10px;  color:#666;  background-color:#222;"></table>
   <table width="100%" border="0" style="border-radius: 10px 10px 10px 10px; color:#666;">
     <tr>
-      <td>{events_perfil}</a>
-      </td>
+      <td>{events_perfil}    </td>
     </tr>
     <tr>
       <td align="left" valign="bottom" style="padding:5px 20px;">
-        <font class="title"><b>{events_title}</b></font><br>
-        <font class="description">{events_description}</font>
+        {events_title}
+        {events_description}
       </td>
     </tr>  
     <tr>
@@ -24,9 +23,10 @@
     <tr>
       <td align="center" colspan="3" valign="center" style="padding:5px 20px;  ">
         <div class="fb-share-button" style="margin:10px;" 
-        data-href="http://{user}.{servidor}/Event/&id={events_id}" 
-        data-layout="button_count">
-      </div>      </td>
+          data-href="http://{user}.{servidor}/Event/&id={events_id}" 
+          data-layout="button_count">
+        </div>      
+      </td>
     </tr>
     
   </table>
