@@ -18,8 +18,8 @@ php_flag track_errors off
 
 
 php_value display_errors On 
-#php_value error_reporting E_ALL
-php_value error_reporting -1
+php_value error_reporting E_ALL
+#php_value error_reporting -1
 php_flag display_startup_errors on
 
 

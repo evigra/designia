@@ -20,6 +20,7 @@
         
     </head>
     <body>
+      <!--
       <div id="fb-root"></div>
       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0&appId=1759620497626721" nonce="2BmnNXWv"></script>      
       
@@ -31,7 +32,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
 
-
+      -->
       <form action="" method="POST" enctype="multipart/form-data">	
         {html_body}  
       </form>
@@ -54,6 +55,15 @@
               }
             );			    
           }	    
+
+
+          if($("div.developer").length>0)
+          {
+            $("div.developer").dialog();
+          }	    
+
+
+
         });
 
       </script>

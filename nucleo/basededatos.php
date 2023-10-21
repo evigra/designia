@@ -46,7 +46,7 @@
 
 		public function __PRINT_R($variable)
 		{  
-		    echo "<div class=\"developer\" title=\"Sistema :: {$this->sys_object} {$this->sys_name}\"><pre>";
+		    echo "<div class=\"developer\" title=\"Sistema\"><pre>";
 		    @print_r(@$variable);
 		    echo "</pre></div>";		    			
     	} 

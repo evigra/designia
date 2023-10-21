@@ -6,7 +6,7 @@
 		##############################################################################		
 		public function __CONSTRUCT()
 		{		
-			$files_available				=array("image/png","image/jpeg");
+			$files_available				=array("image/png","image/jpeg", "video/mp4");
 
 			$this->words["server"]			=$_REQUEST["server"];
 			$this->words["user"]			=$_REQUEST["user"];
@@ -26,8 +26,8 @@
 						'" . $_REQUEST["description"]. "'
 					)
 				";
-				$events_id			=$this->__EXECUTE($comando_sql);	
-
+					
+				#$this->__PRINT_R($_FILES["files"]);
 				foreach($_FILES["files"] as $field => $values)
 				{		        
 					foreach($values as $row => $data) 
@@ -36,6 +36,8 @@
 						{
 							if($field=="name")
 							{
+								if(!isset($events_id)) $events_id			=$this->__EXECUTE($comando_sql);
+
 								$vdata			=explode(".", $data);
 
 								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp)
@@ -49,8 +51,6 @@
 								$this->__FILES_DATA[$row]["id"]			=$file_id;
 								$this->__FILES_DATA[$row]["extension"]	=$vdata[count($vdata)-1];
 								$this->__FILES_DATA[$row]["copiado"]	=0;
-
-
 							}						
 							$this->__FILES_DATA[$row][$field]=$data;
 						}	
@@ -62,16 +62,21 @@
 		}
 		public function __FILES_COPI()
     	{    	
+			#$this->__PRINT_R($this->__FILES_DATA);
 			foreach($this->__FILES_DATA as $row=>$file)
 			{
-				if($file["copiado"]==0)
-				{
-					$maximo=600;
-					$path="modulos/files/file/";
-					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
-					$archivo_r =$path . "r-_file_" . md5($file["id"]) . "." . $file["extension"];
-					//move_uploaded_file($file["tmp_name"], $path . $this->__FILES_DATA[$row]["id"] . "." . $this->__FILES_DATA[$row]["extension"]);
-					
+				$vtype			=explode("/", $file["type"]);
+				$type			=$vtype[0];
+
+				
+				$maximo=600;
+				$path="modulos/files/file/";
+				$archivo =	$path . "file_" . md5($file["id"]) . "." . $file["extension"];
+				
+				#$this->__PRINT_R($vtype);
+
+				if($type=="image")
+				{					
 					$im 			= new imagick($file["tmp_name"]);
 					$imageprops 	= $im->getImageGeometry();
 					$width 			= $imageprops['width'];
@@ -86,26 +91,16 @@
 						$newHeight = ($maximo / $width) * $height;
 					}
 					$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);
-					#$im->cropImage (280,280,0,0);
-					// Escribimos la nueva imagen redimensionada
-					#$im->writeImage( $archivo );	
-					
-					##############################
 
 					$wm = new Imagick();
 					$wm->readImage("logo.png") or die("Couldn't load $wm");
 					$im->compositeImage($wm, imagick::COMPOSITE_OVER, 0, 0);
 					$im->writeImage( $archivo );	
 
-
-					##############################
-
-					/*
-					if(move_uploaded_file($file["tmp_name"], $archivo))
-					{
-						$this->__FILES_DATA[$row]["copiado"]=1;
-					}
-					*/					
+				}
+				else if($type=="video")
+				{
+					move_uploaded_file($file["tmp_name"], $archivo);
 				}
 			}
 

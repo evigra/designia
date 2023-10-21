@@ -59,7 +59,24 @@
 				{
 					$path="../../modulos/files/file/";
 					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
-					$words_event["foto".$rows]=$archivo;
+
+					if($file["extension"]=="jpg")
+					{
+						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							
+					}
+					if($file["extension"]=="mp4")
+					{
+						$words_event["archivo".$rows]="
+							<video width=\"100%\" autoplay controls>
+								<source src=\"$archivo\" type=\"video/mp4\">
+								Your browser does not support the video tag.
+							</video> 							
+					  	";													
+					}
+
+					#$words_event["foto".$rows]=$archivo;
+
+					#$words_event["archivo".$rows]=$archivo;
 					$rows++;
 				}
 
