@@ -36,28 +36,88 @@
 						{
 							if($field=="name")
 							{
+								$maximo=600;
+								$path="modulos/files/file/";
+								###
 								if(!isset($events_id)) $events_id			=$this->__EXECUTE($comando_sql);
 
-								$vdata			=explode(".", $data);
+								$newHeight 		= 0;
+								$newWidth 		= 0;
+								$orientation 	= "horizontal";
 
-								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp)
+								$temporal		=$_FILES["files"]["tmp_name"][$row];
+
+								$vname			=explode(".", $_FILES["files"]["name"][$row]);
+								$extencion		=$vname[count($vname)-1];
+
+								$vtype			=explode("/", $_FILES["files"]["type"][$row]);
+								$type			=$vtype[0];
+				
+								if($type=="image")
+								{	
+									$im 			= new imagick($temporal);
+					
+									$matrizExif = $im->getImageProperties("exif:*");
+
+									if($matrizExif["exif:Orientation"]!=1)
+										$this->__PRINT_R($matrizExif);									
+
+									$imageprops 	= $im->getImageGeometry();
+									$width 			= $imageprops['width'];
+									$height 		= $imageprops['height'];
+				
+									if($width > $height)
+									{
+										$newHeight = $maximo;
+										$newWidth = ($maximo / $height) * $width;
+									}else{
+										$newWidth = $maximo;
+										$newHeight = ($maximo / $width) * $height;
+									}
+				
+									$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);					
+				
+									$logo = new Imagick();
+									$logo->readImage("logo.png") or die("Couldn't load $logo");
+				
+									if($matrizExif["exif:Orientation"]==6)
+									{
+										$orientation 	= "vertical";
+										$logo->rotateimage(new ImagickPixel(), 270);
+									}
+									if($matrizExif["exif:Orientation"]==8)
+									{
+										$orientation 	= "vertical";
+										$logo->rotateimage(new ImagickPixel(), 90);
+									}
+
+
+				
+									$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
+								}
+
+								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
 								VALUES(	
 									'$events_id', 
 									'1', 
-									'" . $vdata[count($vdata)-1] ."',
-									'" . $_FILES["files"]["tmp_name"][$row] . "'
+									'" . $extencion . "',
+									'" . $temporal ."',									
+									'" . $height . "',
+									'" . $width . "',
+									'" . $orientation . "'
 								)";
-								$file_id								=$this->__EXECUTE($comando_sql);					
-								$this->__FILES_DATA[$row]["id"]			=$file_id;
-								$this->__FILES_DATA[$row]["extension"]	=$vdata[count($vdata)-1];
-								$this->__FILES_DATA[$row]["copiado"]	=0;
+								$file_id					=$this->__EXECUTE($comando_sql);					
+
+								$archivo 					=$path . "file_" . md5($file_id) . "." . $extencion;
+
+
+
+								if($type=="image")			$im->writeImage( $archivo );	
+								else if($type=="video")		move_uploaded_file($temporal, $archivo);
 							}						
-							$this->__FILES_DATA[$row][$field]=$data;
 						}	
 					}
 				}				
-				$this->__FILES_COPI();
-				
 			}
 		}
 		public function __FILES_COPI()
@@ -69,39 +129,6 @@
 				$type			=$vtype[0];
 
 				
-				$maximo=600;
-				$path="modulos/files/file/";
-				$archivo =	$path . "file_" . md5($file["id"]) . "." . $file["extension"];
-				
-				#$this->__PRINT_R($vtype);
-
-				if($type=="image")
-				{					
-					$im 			= new imagick($file["tmp_name"]);
-					$imageprops 	= $im->getImageGeometry();
-					$width 			= $imageprops['width'];
-					$height 		= $imageprops['height'];
-
-					if($width > $height)
-					{
-						$newHeight = $maximo;
-						$newWidth = ($maximo / $height) * $width;
-					}else{
-						$newWidth = $maximo;
-						$newHeight = ($maximo / $width) * $height;
-					}
-					$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);
-
-					$wm = new Imagick();
-					$wm->readImage("logo.png") or die("Couldn't load $wm");
-					$im->compositeImage($wm, imagick::COMPOSITE_OVER, 0, 0);
-					$im->writeImage( $archivo );	
-
-				}
-				else if($type=="video")
-				{
-					move_uploaded_file($file["tmp_name"], $archivo);
-				}
 			}
 
 		}		

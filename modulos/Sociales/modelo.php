@@ -46,7 +46,8 @@
 
 				$archivos		=count($files);
 
-				if($archivos>2)	$archivos=3;	
+				if($archivos>2)	$archivos=3;
+				else if($archivos==0)	$archivos=1;	
 
 				$words_perfil				=$this->__PERFIL_DATA($row);
 				$words_event=array(
@@ -56,7 +57,6 @@
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
 				);				
-
 
 				$paths=array();
 				$rows=1;
