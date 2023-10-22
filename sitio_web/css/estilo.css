@@ -53,17 +53,6 @@ body{
 	background-color:	var(--fondo_color1);
 	width: 				calc(100% - (var(--ancho_lateral) * 2));	
 }
-#pie
-{
-	/*
-	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
-	*/
-	position:			static; 
-	left:				0; 
-	bottom:				10; 
-	width:				100%; 
-
-}
 .contenido
 {
 	width:				var(--ancho_contenido); 

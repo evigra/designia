@@ -33,17 +33,6 @@
 
 			foreach($events as $id =>$row)
 			{
-				if($row["title"]!="")		$row["title"]		="<h4>{$row["title"]}</h4>";
-				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
-
-				$words_perfil				=$this->__PERFIL_DATA($row);
-				$words_event=array(
-					"events_id"				=>md5($row["event_id"]),
-					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
-					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos/galeria_fotos_" . random_int(1, 3), $words_perfil),					
-					"events_title"			=>$row["title"],
-					"events_description"	=>$row["description"],
-				);				
 				$comando_sql	="
 					SELECT * FROM files
 					WHERE event_id='" . $row["event_id"]. "'
@@ -51,6 +40,23 @@
 					LIMIT 5
 				";
 				$files=$this->__EXECUTE($comando_sql);
+
+				if($row["title"]!="")		$row["title"]		="<h4>{$row["title"]}</h4>";
+				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
+
+				$archivos		=count($files);
+
+				if($archivos>2)	$archivos=3;	
+
+				$words_perfil				=$this->__PERFIL_DATA($row);
+				$words_event=array(
+					"events_id"				=>md5($row["event_id"]),
+					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos/galeria_fotos_" . random_int(1, $archivos), $words_perfil),					
+					"events_title"			=>$row["title"],
+					"events_description"	=>$row["description"],
+				);				
+
 
 				$paths=array();
 				$rows=1;
