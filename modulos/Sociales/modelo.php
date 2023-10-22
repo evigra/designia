@@ -81,8 +81,6 @@
 					$rows++;
 				}
 
-
-				
 				$return	.=$this->__VIEW_BASE("contenido", $words_event);
 			}
 			return $return;

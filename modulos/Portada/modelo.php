@@ -13,7 +13,7 @@
 		{	
 			return parent::__CONSTRUCT($option);
 		}
-   		public function __HTML_LEFT()
+   		public function __HTML_CENTER()
     	{
 			$return			="";
 			$user_ids		="";
@@ -25,28 +25,39 @@
 				FROM 
 					events e JOIN 
 					user u ON e.user_id=u.id 
-				#WHERE type='portada'
+				#WHERE type='" . $_REQUEST["class"]. "'
+				ORDER by e.id DESC
 				LIMIT 1
 			";
+			
 			$events=$this->__EXECUTE($comando_sql);
-
-			foreach($events as $id =>$row)
+			foreach($events as $event)
 			{
-				$words_perfil=array(
-					"perfil_name"	=>$row["name"],
-					"perfil_user"	=>$row["user"],
-					"perfil_date"	=>$row["datetime_show"],
-					"perfil_type"	=>$row["type"],					
-					"perfil_url"	=>"http://". $row["user"].".".$_REQUEST["server"],			
-				);
-				$words_event=array(
-					"events_id"				=>md5($row["event_id"]),
-					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
-					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos_1", $words_perfil),					
-					"events_title"			=>$row["title"],
-					"events_description"	=>$row["description"],
-				);				
-				$return	.=$this->__VIEW_BASE("contenido_portada", $words_event);
+				$comando_sql	="
+					SELECT * FROM files
+					WHERE event_id='" . $event["event_id"]. "'
+					ORDER BY RAND()
+				";
+				$files=$this->__EXECUTE($comando_sql);
+				foreach($files as $id =>$row)
+				{
+					$path="../../modulos/files/file/";
+					$md5_file=md5($row["id"]);
+					$archivo =$path . "file_$md5_file." . $row["extension"];
+		
+					$words_event=array(
+						"index"					=>$id,
+					);
+					$return	.=$this->__VIEW_MODULE("fotos", $words_event);
+					
+					$words_file=array(						
+						"foto$id" => $archivo,
+						"style$id"=> $row["orientation"],
+						"file$id" => $md5_file
+
+					);
+					$return		=$this->__REPLACE($return,$words_file);				
+				}
 			}
 			return $return;
 		}

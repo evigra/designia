@@ -80,18 +80,25 @@
 									$logo = new Imagick();
 									$logo->readImage("logo.png") or die("Couldn't load $logo");
 				
+									$width 			= $newwidth;
+									$height 		= $newheight;	
+
 									if($matrizExif["exif:Orientation"]==6)
 									{
+										$width 			= $newheight;
+										$height 		= $newwidth;	
+	
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 270);
 									}
 									if($matrizExif["exif:Orientation"]==8)
 									{
+										$width 			= $newheight;
+										$height 		= $newwidth;	
+
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 90);
 									}
-
-
 				
 									$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
 								}
@@ -109,8 +116,6 @@
 								$file_id					=$this->__EXECUTE($comando_sql);					
 
 								$archivo 					=$path . "file_" . md5($file_id) . "." . $extencion;
-
-
 
 								if($type=="image")			$im->writeImage( $archivo );	
 								else if($type=="video")		move_uploaded_file($temporal, $archivo);
