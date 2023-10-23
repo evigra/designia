@@ -106,7 +106,9 @@ h4, h3, h2, h1{
 /* ####################################### */
 /* ######      DESKTOP MEDIO        ###### */
 /* ####################################### */
-@media (min-width:992px)
+
+
+@media (max-height:899px) 
 {
 	.vertical
 	{
@@ -114,30 +116,16 @@ h4, h3, h2, h1{
 	}
 
 }
-
-
-/* ####################################### */
-/* ######         TABLETS           ###### */
-/* ####################################### */
-@media (max-width:991px) 
-{
-	
-	.horizontal
-	{
-		visibility: hidden;
-	}
-	.vertical
-	{
-		bottom: 0px;
-	}	
-}
-
-
 @media (min-height:900px) 
 {
 	a{
-		font-size:			40px; 
+		font-size:			30px; 
 	}
+	.horisontal
+	{
+		visibility: hidden;
+	}
+
 }
 
 
