@@ -1,8 +1,8 @@
 <?php
-	$objeto			=new chilaquil();
+	$objeto			=new articulos();
 
 	$objeto->words["html_head_css"]			="default";
-	$objeto->words["html_head_title"]		.="Chilaquil";
+	$objeto->words["html_head_title"]		.="Articulos";
 	
 	$objeto->words["html_head_description"]	="Esta descripcion";
 	$objeto->words["html_head_keywords"]	="Designia, Designia.vip, Eventos, events";

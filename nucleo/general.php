@@ -59,8 +59,8 @@
 					
 									$matrizExif = $im->getImageProperties("exif:*");
 
-									if($matrizExif["exif:Orientation"]!=1)
-										$this->__PRINT_R($matrizExif);									
+									#if($matrizExif["exif:Orientation"]!=1)
+									#	$this->__PRINT_R($matrizExif);									
 
 									$imageprops 	= $im->getImageGeometry();
 									$width 			= $imageprops['width'];
@@ -80,21 +80,21 @@
 									$logo = new Imagick();
 									$logo->readImage("logo.png") or die("Couldn't load $logo");
 				
-									$width 			= $newwidth;
-									$height 		= $newheight;	
+									$width 			= $newWidth;
+									$height 		= $newHeight;	
 
 									if($matrizExif["exif:Orientation"]==6)
 									{
-										$width 			= $newheight;
-										$height 		= $newwidth;	
+										$width 			= $newHeight;
+										$height 		= $newWidth;	
 	
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 270);
 									}
 									if($matrizExif["exif:Orientation"]==8)
 									{
-										$width 			= $newheight;
-										$height 		= $newwidth;	
+										$width 			= $newHeight;
+										$height 		= $newWidth;	
 
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 90);
