@@ -119,11 +119,9 @@ h4, h3, h2, h1{
 /* ####################################### */
 /* ######         TABLETS           ###### */
 /* ####################################### */
-
-
-@media (max-height:200px) 
+@media (max-width:991px) 
 {
-
+	
 	.horizontal
 	{
 		visibility: hidden;
@@ -132,11 +130,15 @@ h4, h3, h2, h1{
 	{
 		bottom: 0px;
 	}	
+}
+
+
+@media (min-height:900px) 
+{
 	a{
 		font-size:			40px; 
 	}
 }
-
 
 
 
