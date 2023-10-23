@@ -51,7 +51,9 @@
             $("font#accion").button()
               .click(function()
               {				
-                $("form").submit();		        
+                $("form").submit();		
+                $(this).prop('disabled', true);
+                $(this).value('Cargando Archivos');        
               }
             );			    
           }	    

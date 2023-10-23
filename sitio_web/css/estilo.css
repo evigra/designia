@@ -36,10 +36,11 @@ body{
 	
 	*/
 	padding: 			13px; 
-	position:			absolute; 
+	position:			fixed; 
 	left:				0; 
 	top:				0; 
 	width:				100%; 
+	z-index: 			1;
 	
 	
 }
@@ -49,6 +50,7 @@ body{
 	width:				var(--ancho_lateral);
 	background-color:	var(--fondo_color1);
 }
+/*
 .body_center
 {
 	position:			absolute; 
@@ -56,7 +58,7 @@ body{
 	top:				var(--altura_cabecera);  
 	background-color:	var(--fondo_color1);
 	width: 				calc(100% - (var(--ancho_lateral) * 2));	
-}
+}*/
 .contenido
 {
 	width:				var(--ancho_contenido); 
