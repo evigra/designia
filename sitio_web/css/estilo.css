@@ -33,6 +33,7 @@ body{
 	margin: 			20px calc(100% /2 - ((var(--ancho_contenido) /2 ) )); 
 	margin: 			calc(var(--altura_cabecera) - 25px ) auto; 
 	height:				var(--altura_cabecera); 
+	
 	*/
 	padding: 			13px; 
 	position:			absolute; 
