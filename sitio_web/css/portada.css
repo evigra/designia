@@ -11,6 +11,66 @@
 	--fuente_color1: 	gray;
 	--fuente_color2: 	#174950;
 	--fuente_color3: 	#174950;
-
 }
 
+
+/* ####################################### */
+/* ######      DESKTOP MEDIO        ###### */
+/* ####################################### */
+@media (orientation: portrait)
+{
+	#body_center
+	{
+		z-index:			20; 
+		position:			fixed; 
+		top:				68px; 
+		width:				100%;
+		height: 			100%;
+	}
+	
+
+	.horizontal
+	{
+		visibility: 		hidden;
+	}
+	.vertical
+	{
+		visibility:			visible;		
+		position:			absolute; 
+		left:				100px;
+		top:				68px;
+		width: 				100%;		
+	}	
+	a{
+		font-size:			30px; 
+	}
+}
+@media (orientation:landscape)
+{
+
+	#body_center
+	{
+		z-index:			20; 
+		position:			fixed; 
+		top:				50px; 
+		left:				calc(100% /7); 
+		width:				100%;
+		height: 			100%;
+	}
+
+	.horizontal
+	{
+		visibility: 		visible;
+		width:				70%;
+		position:			absolute;
+		left:				300px;
+		top:				200px; 		
+	}
+	.vertical
+	{
+		visibility:			hidden;
+	}	
+	a{
+		font-size:			15px; 
+	}
+}

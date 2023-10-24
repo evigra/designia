@@ -13,4 +13,11 @@
 	--fuente_color3: 	#174950;
 
 }
+#body_center
+{
+	z-index:			20; 
+	position:			absolute; 
+	top:				50px; 
+	width:				100%;
+}
 

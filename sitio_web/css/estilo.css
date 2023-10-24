@@ -51,13 +51,6 @@ body{
 	background-color:	var(--fondo_color1);
 }
 
-#body_center
-{
-	z-index:20; 
-	position:absolute; 
-	top:50px; 
-	width:100%;
-}
 .contenido
 {
 	width:				var(--ancho_contenido); 
@@ -105,48 +98,7 @@ h4, h3, h2, h1{
 }
 
 
-/* ####################################### */
-/* ######      DESKTOP MEDIO        ###### */
-/* ####################################### */
-@media (orientation: portrait)
-{
-	.horizontal
-	{
-		visibility: 		hidden;
-	}
-	.vertical
-	{
-		visibility:			visible;
-		
-		width:				100%; 
-		margin: 			0px -auto; 	
-		display: 			flex;
-		position:			fixed; 
-		top:				68px;		
-	}	
-	a{
-		font-size:			30px; 
-	}
-}
-@media (orientation:landscape)
-{
-	.horizontal
-	{
-		visibility: 		visible;
-		width:				90%; 
-		margin: 			auto 0px; 	
-		position:			fixed; 
-		left:				calc(100% /25) ;
-		top:				50px;		
-	}
-	.vertical
-	{
-		visibility:			hidden;
-	}	
-	a{
-		font-size:			15px; 
-	}
-}
+
 
 /*
 @media (min-width:450px) 

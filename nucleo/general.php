@@ -46,7 +46,7 @@
 
 								$newHeight 		= 0;
 								$newWidth 		= 0;
-								$orientation 	= "horizontal";
+								$orientation 	= "";
 
 								$temporal		=$_FILES["files"]["tmp_name"][$row];
 
@@ -86,6 +86,11 @@
 									$width 			= round($newWidth);
 									$height 		= round($newHeight);	
 
+									if(@$matrizExif["exif:Orientation"]==1)
+									{
+										$orientation 	= "horizontal";										
+									}
+
 									if(@$matrizExif["exif:Orientation"]==6)
 									{
 										$width 			= $newHeight;
@@ -102,7 +107,13 @@
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 90);
 									}
-				
+
+									if($orientation=="")
+									{
+										if($height>$width)	$orientation 	= "vertical";
+										else				$orientation 	= "horizontal";
+									}
+									
 									$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
 								}
 
