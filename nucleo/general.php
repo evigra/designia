@@ -34,6 +34,9 @@
 					{
 						if(in_array($_FILES["files"]["type"][$row], $files_available))
 						{
+							$width 			= 0;
+							$height 		= 0;
+
 							if($field=="name")
 							{
 								$maximo=600;
@@ -80,10 +83,10 @@
 									$logo = new Imagick();
 									$logo->readImage("logo.png") or die("Couldn't load $logo");
 				
-									$width 			= $newWidth;
-									$height 		= $newHeight;	
+									$width 			= round($newWidth);
+									$height 		= round($newHeight);	
 
-									if($matrizExif["exif:Orientation"]==6)
+									if(@$matrizExif["exif:Orientation"]==6)
 									{
 										$width 			= $newHeight;
 										$height 		= $newWidth;	
@@ -91,7 +94,7 @@
 										$orientation 	= "vertical";
 										$logo->rotateimage(new ImagickPixel(), 270);
 									}
-									if($matrizExif["exif:Orientation"]==8)
+									if(@$matrizExif["exif:Orientation"]==8)
 									{
 										$width 			= $newHeight;
 										$height 		= $newWidth;	

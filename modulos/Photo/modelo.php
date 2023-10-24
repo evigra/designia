@@ -34,7 +34,7 @@
 					user u ON e.user_id=u.id 
 				WHERE
 					MD5(e.id)='$_REQUEST[event]' 
-					AND MD5(f.id)='$_REQUEST[file]'
+					#AND MD5(f.id)='$_REQUEST[file]'
 
 			";
 			$files=$this->__EXECUTE($comando_sql);

@@ -50,15 +50,14 @@ body{
 	width:				var(--ancho_lateral);
 	background-color:	var(--fondo_color1);
 }
-/*
-.body_center
+
+#body_center
 {
-	position:			absolute; 
-	left:				var(--ancho_lateral); 
-	top:				var(--altura_cabecera);  
-	background-color:	var(--fondo_color1);
-	width: 				calc(100% - (var(--ancho_lateral) * 2));	
-}*/
+	z-index:20; 
+	position:absolute; 
+	top:50px; 
+	width:100%;
+}
 .contenido
 {
 	width:				var(--ancho_contenido); 
@@ -109,37 +108,77 @@ h4, h3, h2, h1{
 /* ####################################### */
 /* ######      DESKTOP MEDIO        ###### */
 /* ####################################### */
-
-
-@media (max-height:899px) 
+@media (orientation: portrait)
 {
+	.horizontal
+	{
+		visibility: 		hidden;
+	}
 	.vertical
 	{
-		visibility: hidden;
-	}
-	.horisonatal
-	{
-		visibility:visible;
-	}
-
-}
-@media (min-height:900px) 
-{
+		visibility:			visible;
+		
+		width:				100%; 
+		margin: 			0px -auto; 	
+		display: 			flex;
+		position:			fixed; 
+		top:				68px;		
+	}	
 	a{
 		font-size:			30px; 
 	}
-	.horisontal
+}
+@media (orientation:landscape)
+{
+	.horizontal
 	{
-		visibility: hidden;
+		visibility: 		visible;
+		width:				90%; 
+		margin: 			auto 0px; 	
+		position:			fixed; 
+		left:				calc(100% /25) ;
+		top:				50px;		
 	}
 	.vertical
 	{
-		visibility: visible;
+		visibility:			hidden;
+	}	
+	a{
+		font-size:			15px; 
 	}
-
 }
 
+/*
+@media (min-width:450px) 
+{
+	.horizontal
+	{
+		visibility: 		hidden;
+	}
+	.vertical
+	{
+		visibility:			visible;
+	}	
+	a{
+		font-size:			30px; 
+	}
+}
+@media (max-width:449px) 
+{
+	.horizontal
+	{
+		visibility: visible;
+	}
+	.vertical
+	{
+		visibility:			hidden;
+	}	
 
+	a{
+		font-size:			15px; 
+	}
+}
+*/
 
 /*
 *{
