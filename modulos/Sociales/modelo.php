@@ -39,7 +39,7 @@
 				$comando_sql	="
 					SELECT * FROM files
 					WHERE event_id='" . $row["event_id"]. "'
-					ORDER BY RAND()
+					ORDER BY RAND(), orientation desc
 					LIMIT 5
 				";
 				$files=$this->__EXECUTE($comando_sql);

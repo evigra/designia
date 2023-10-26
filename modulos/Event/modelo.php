@@ -57,7 +57,7 @@
 					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
 					
 					$words_file=array(						
-						"archivo$id" => $archivo,
+						"archivo$id" => $archivo,						
 						"file$id" => $md5_file
 					);
 
