@@ -74,7 +74,7 @@
 					if(in_array($file["extension"], $files_video))
 					{
 						$words_event["archivo".$rows]="
-							<video width=\"100%\" autoplay controls>
+							<video width=\"100%\" max-height=\"600\"  controls>
 								<source src=\"$archivo\" type=\"video/mp4\">
 								Your browser does not support the video tag.
 							</video> 							
