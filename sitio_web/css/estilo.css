@@ -79,7 +79,7 @@ body{
 }
 .fotos2
 {
-	width:				calc((var(--ancho_contenido)/2) ); 
+	width:				calc((var(--ancho_contenido)/2) * 0.90); 
 	height:				calc((var(--ancho_contenido)/2) * 0.66 ); 
 }
 #galeria_fotos
