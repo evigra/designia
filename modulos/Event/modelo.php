@@ -42,9 +42,9 @@
 				$return	="";	
 				foreach($files as $id =>$row)
 				{
-					$path="../../modulos/files/file/";
-					$md5_file=md5($row["file_id"]);
-					$archivo =$path . "file_$md5_file." . $row["extension"];
+					$path						="../../modulos/files/file/";
+					$md5_file					=md5($row["file_id"]);
+					$archivo 					=$path . "file_$md5_file." . $row["extension"];
 					$words_perfil				=$this->__PERFIL_DATA($row);
 
 					$words_template=array(
@@ -57,7 +57,7 @@
 					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
 					
 					$words_file=array(						
-						"foto$id" => $archivo,
+						"archivo$id" => $archivo,
 						"file$id" => $md5_file
 					);
 
