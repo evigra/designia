@@ -67,7 +67,6 @@
 					$path="../../modulos/files/file/";
 					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
 											
-					#if($file["extension"]=="jpg")
 					if(in_array($file["extension"], $files_image))
 					{
 						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							

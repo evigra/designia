@@ -15,6 +15,9 @@
 		}
 		public function __BROWSE()
     	{
+			$files_image				=array("png","jpeg","jpg");
+			$files_video				=array("mp4");
+
 			$return			="";
 			$user_ids		="";
 			$usuarios		=array();
@@ -65,11 +68,11 @@
 					$path="../../modulos/files/file/";
 					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
 
-					if($file["extension"]=="jpg")
+					if(in_array($file["extension"], $files_image))
 					{
 						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							
 					}
-					if($file["extension"]=="mp4")
+					if(in_array($file["extension"], $files_video))
 					{
 						$words_event["archivo".$rows]="
 							<video width=\"100%\" autoplay controls>
