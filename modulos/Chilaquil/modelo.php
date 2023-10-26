@@ -74,11 +74,11 @@
 					if(in_array($file["extension"], $files_video))
 					{
 						$words_event["archivo".$rows]="
-							<video width=\"100%\" max-height=\"600\"  controls>
+							<video  style=\"max-height:600px; max-width:800px;\"  controls>
 								<source src=\"$archivo\" type=\"video/mp4\">
 								Your browser does not support the video tag.
-							</video> 							
-					  	";													
+							</video> 												  	
+						";
 					}
 					$rows++;
 				}
