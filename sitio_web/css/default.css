@@ -21,3 +21,18 @@
 	width:				100%;
 }
 
+
+
+
+@media (orientation: portrait)
+{
+	a{
+		font-size:			30px; 
+	}
+}
+@media (orientation:landscape)
+{
+	a{
+		font-size:			15px; 
+	}
+}
