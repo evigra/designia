@@ -59,7 +59,8 @@
 					
 					$words_file=array(						
 						"archivo$id" => $archivo,						
-						"file$id" => $md5_file
+						"file$id" => $md5_file,
+						
 					);
 
 					$return		=$this->__REPLACE($return,$words_file);
@@ -71,6 +72,7 @@
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photo"			=>"",
 					"events_photos"			=>$return,
 				);
 
