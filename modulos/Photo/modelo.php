@@ -45,7 +45,19 @@
 				{
 					$path="../../modulos/files/file/";
 					$md5_file=md5($row["file_id"]);
-					$archivo =$path . "file_$md5_file." . $row["extension"];
+
+
+					if($_REQUEST["file"]==$md5_file)
+					{
+						$archivo 	=$path . "file_$md5_file." . $row["extension"];
+						$photo	="<img src=\"$archivo\" width=\"100%\">";	
+					}						
+					else
+					{
+						$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
+						$archivo	="<img src=\"$archivo\">";	
+					}
+
 					$words_perfil				=$this->__PERFIL_DATA($row);
 
 					$words_template=array(
@@ -70,6 +82,7 @@
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photo"			=>$photo,	
 					"events_photos"			=>$return,
 				);
 
