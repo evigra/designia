@@ -46,17 +46,17 @@
 					$path="../../modulos/files/file/";
 					$md5_file=md5($row["file_id"]);
 
+					$archivo 	="";
 
 					if($_REQUEST["file"]==$md5_file)
 					{
 						$archivo 	=$path . "file_$md5_file." . $row["extension"];
-						$photo	="<img src=\"$archivo\" width=\"100%\">";	
+						$photo	="<img src=\"$archivo\" width=\"100%\">";
+						
+
 					}						
-					else
-					{
-						$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
-						$archivo	="<img src=\"$archivo\">";	
-					}
+					$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
+					$archivo	="<img src=\"$archivo\">";	
 
 					$words_perfil				=$this->__PERFIL_DATA($row);
 
@@ -72,11 +72,8 @@
 						"foto$id" => $archivo,
 						"file$id" => $md5_file
 					);
-
 					$return		=$this->__REPLACE($return,$words_file);
 				}
-
-				#$this->__PRINT_R($return);
 
 				$words_event=array(
 					"events_title"			=>$row["title"],
@@ -88,7 +85,6 @@
 
 				$return	=$this->__VIEW_BASE("galeria", $words_event);
 			}
-
 			return $return;
 		}
 	}

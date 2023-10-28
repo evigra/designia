@@ -18,10 +18,6 @@
 	
 	echo $objeto->__VIEW_BASE("index", $objeto->words);	
 
-
-
-
-
 /*
 
 	$objeto->words["html_head_title"]		.=$_REQUEST["class"];
