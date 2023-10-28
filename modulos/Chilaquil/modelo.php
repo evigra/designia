@@ -65,7 +65,7 @@
 				foreach($files as $file)
 				{
 					$path="../../modulos/files/file/";
-					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
+					$archivo =$path . "file_" . md5($file["id"]) . "_th." . $file["extension"];
 											
 					if(in_array($file["extension"], $files_image))
 					{

@@ -10,11 +10,12 @@
 		##############################################################################
          
 		public function __CONSTRUCT($option=null)
-		{	
+		{				
 			return parent::__CONSTRUCT($option);
 		}
    		public function __BROWSE()
     	{
+
 			$words_event=array(
 				"events_title"			=>"Este es el titulo del evento",
 				"events_description"	=>"Aqui apareceria la descipcion del evento",
@@ -44,7 +45,7 @@
 				{
 					$path						="../../modulos/files/file/";
 					$md5_file					=md5($row["file_id"]);
-					$archivo 					=$path . "file_$md5_file." . $row["extension"];
+					$archivo 					=$path . "file_$md5_file"."_th." . $row["extension"];
 					$words_perfil				=$this->__PERFIL_DATA($row);
 
 					$words_template=array(

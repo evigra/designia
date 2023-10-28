@@ -12,7 +12,22 @@
 			$this->words["user"]			=$_REQUEST["user"];
 			$this->words["path"]			=$_REQUEST["path"];
 			$this->__FILES_DATA				=array();	
-			$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);
+
+
+			if(isset($_SESSION["user"]))
+			{
+				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);
+				
+				$this->words["html_sesion"]		="
+					<a href=\"../../&sys_action=cerrar_sesion\" style=\"color:#fff;\">Cerrar Sesion</a>
+				";
+			}
+			else
+			{
+				$this->words["html_sesion"]		="<a href=\"../../Sesion/Create/\" style=\"color:#fff;\">Logeate</a>";
+				
+
+			}
 
 			if(isset($_FILES["files"]))
 			{	
@@ -39,7 +54,6 @@
 
 							if($field=="name")
 							{
-								$maximo=600;
 								$path="modulos/files/file/";
 								###
 								if(!isset($events_id)) $events_id			=$this->__EXECUTE($comando_sql);
@@ -62,30 +76,19 @@
 					
 									$matrizExif = $im->getImageProperties("exif:*");
 
-									#if($matrizExif["exif:Orientation"]!=1)
-									#	$this->__PRINT_R($matrizExif);									
-
 									$imageprops 	= $im->getImageGeometry();
 									$width 			= $imageprops['width'];
 									$height 		= $imageprops['height'];
-				
-									if($width > $height)
-									{
-										$newHeight = $maximo;
-										$newWidth = ($maximo / $height) * $width;
-									}else{
-										$newWidth = $maximo;
-										$newHeight = ($maximo / $width) * $height;
-									}
-				
+
+									$redimencion	=$this->__REDIMENSION(700, $width, $height);
+
+									$newWidth 			= $redimencion[1];
+									$newHeight 		= $redimencion[0];	
 									$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);					
 				
 									$logo = new Imagick();
 									$logo->readImage("logo.png") or die("Couldn't load $logo");
 				
-									$width 			= round($newWidth);
-									$height 		= round($newHeight);	
-
 									if(@$matrizExif["exif:Orientation"]==1)
 									{
 										$orientation 	= "horizontal";										
@@ -114,7 +117,7 @@
 										else				$orientation 	= "horizontal";
 									}
 									
-									$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
+									#$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
 								}
 
 								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
@@ -131,7 +134,21 @@
 
 								$archivo 					=$path . "file_" . md5($file_id) . "." . $extencion;
 
-								if($type=="image")			$im->writeImage( $archivo );	
+								if($type=="image")			
+								{
+									// redimencionada
+									$im->writeImage( $archivo );	
+									$th				=$im;
+
+									// thumb
+									$redimencion	=$this->__REDIMENSION(350, $width, $height);
+									$width 			= $redimencion[1];
+									$height 		= $redimencion[0];	
+									$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
+
+									$archivo 		=$path . "file_" . md5($file_id) . "_th." . $extencion;
+									$th->writeImage( $archivo );
+								}
 								else if($type=="video")		move_uploaded_file($temporal, $archivo);
 							}						
 						}	
@@ -150,6 +167,24 @@
 				
 			}
 
+		}		
+		public function __REDIMENSION($maximo, $width, $height)
+    	{    	
+			if($width > $height)
+			{
+				$newHeight = $maximo;
+				$newWidth = ($maximo / $height) * $width;
+			}else{
+				$newWidth = $maximo;
+				$newHeight = ($maximo / $width) * $height;
+			}
+			if($newHeight>$maximo)
+			{
+				$newHeight2 = $newHeight;
+				$newHeight = $maximo;
+				$newWidth = ($maximo / $newHeight2) * $newWidth;
+			}
+			return array(round($newHeight), round($newWidth));
 		}		
 
 
