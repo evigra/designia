@@ -43,20 +43,32 @@
 				";
 				$files=$this->__EXECUTE($comando_sql);
 
-				if($row["title"]!="")		$row["title"]		="<h4>{$row["title"]}</h4>";
+				$title="";
+				if($row["title"]!="")		
+				{
+					$title					="<h4>{$row["title"]}</h4>";
+
+					$title_url				=str_replace(" ", "_", $row["title"]);   
+					$title_url				=urlencode($title_url);
+					$title_url				=str_replace("%", "_", $title_url);
+					$title_url				=str_replace("/", "_", $title_url);					
+				}
+				else	$title_url			="Evento ";
+
 				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
 
-				$archivos		=count($files);
+				$archivos					=count($files);
 
 				if($archivos>2)	$archivos=3;
-				else if($archivos==0)	$archivos=1;	
+				else if($archivos==0)		$archivos=1;	
 
 				$words_perfil				=$this->__PERFIL_DATA($row);
+
 				$words_event=array(
-					
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos/galeria_fotos_" . random_int(1, $archivos), $words_perfil),															
-					"events_title"			=>$row["title"],
+					"events_title"			=>$title,
+					"events_title_url"		=>$title_url,
 					"events_description"	=>$row["description"],
 				);				
 
@@ -68,9 +80,8 @@
 					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
 
 					$words_event["events_id"] 	=md5($row["event_id"]);					
-					$words_event["file$rows"] 	=md5($file["id"]);					
+					$words_event["file$rows"] 	=md5($file["id"]);	
 					
-
 					if(in_array($file["extension"], $files_image))
 					{
 						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							

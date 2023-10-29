@@ -23,7 +23,7 @@
 			}
 			else
 			{
-				$this->words["html_sesion"]		="<a href=\"../../Sesion/Create/\" style=\"color:#fff;\">Logeate</a>";
+				$this->words["html_sesion"]		="<a href=\"../../Sesion/Create/\" style=\"color:#fff;\">Login</a>";
 			}
 
 			if(isset($_FILES["files"]))

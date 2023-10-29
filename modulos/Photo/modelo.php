@@ -38,6 +38,7 @@
 
 			";
 			$files=$this->__EXECUTE($comando_sql);
+			
 			if($files)
 			{
 				$return	="";	
@@ -52,20 +53,43 @@
 					{
 						$archivo 	=$path . "file_$md5_file." . $row["extension"];
 						$photo	="<img src=\"$archivo\" width=\"100%\">";
-						
-
 					}						
 					$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
 					$archivo	="<img src=\"$archivo\">";	
 
 					$words_perfil				=$this->__PERFIL_DATA($row);
+				
+
+
+
+					$title="";
+					if($row["title"]!="")		
+					{
+						$title					="<h4>{$row["title"]}</h4>";
+		
+						$title_url				=str_replace(" ", "_", $row["title"]);   
+						$title_url				=urlencode($title_url);
+						$title_url				=str_replace("%", "_", $title_url);
+						$title_url				=str_replace("/", "_", $title_url);					
+					}
+					else	$title_url			="Evento ";
+		
+
+
 
 					$words_template=array(
 						#"events_title"			=>$row["title"],
 						#"events_description"	=>$row["description"],
 						"evento" 				=>$_REQUEST["event"],
-						"index"					=>$id
+						"index"					=>$id,
+						"events_title"			=>$title,
+						"events_title_url"		=>$title_url,
+	
 					);		
+
+
+
+
 					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
 					
 					$words_file=array(						
