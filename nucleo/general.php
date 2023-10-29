@@ -13,6 +13,7 @@
 			$this->words["path"]			=$_REQUEST["path"];
 			$this->__FILES_DATA				=array();	
 
+			$this->__PRINT_R($this->words["server"]);
 
 			if(isset($_SESSION["user"]))
 			{

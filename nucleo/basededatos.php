@@ -3,12 +3,30 @@
 	{    
 		public function __SYS_DB()
 		{  
+			if($this->words["server"]=="designia.localhost")
+			{
+				$host	="localhost";
+				$db		="produccion";
+			}
+			if($this->words["server"]=="designia.vip")
+			{
+				if($this->words["user"]=="developer")
+				{
+					$host	="localhost";
+					$db		="developer";
+				}
+				if($this->words["user"]!="developer")
+				{
+					$host	="localhost";
+					$db		="produccion";
+				}
+			}			
+
 			return array(
 				"user"		=>"remoto",
 				"pass"		=>"EvG30JiC06",
-				"name"		=>"produccion",
-				"host"		=>"solesgps.com",
-				"host"		=>"localhost",
+				"name"		=>$db,
+				"host"		=>$host,
 				"type"		=>"mysql",
 			);
 		}
@@ -50,6 +68,5 @@
 		    @print_r(@$variable);
 		    echo "</pre></div>";		    			
     	} 
-
 	}
 ?>
