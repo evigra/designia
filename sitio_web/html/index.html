@@ -41,7 +41,11 @@
             $("font#accion").button()
               .click(function()
               {				
-                $(this).prop('disabled', true);
+                $(this).attr('disabled', true);
+                $(this).html('Cargando'); 
+                
+                //$(this).prop('disabled', true);
+                //$(this).prop('text', 'algo');
                 //$(this).value('Emviando Datos');        
                 $("form").submit();		
               }
