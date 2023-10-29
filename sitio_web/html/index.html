@@ -16,7 +16,7 @@
         <meta property="og:description"   content="{html_head_description}" />
 
         <link rel="icon" href="../../icono.png" type="image/x-icon">
-
+        <script src="../../sitio_web/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <!--
         <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
         -->
@@ -49,9 +49,15 @@
                 //$(this).value('Emviando Datos');        
                 $("form").submit();		
               }
-            );			    
+            );		
+            
+                        
           }	    
 
+
+
+
+          
           function varias(active, next)
           {
 
@@ -111,7 +117,34 @@
       </script>
 
 
+      
+      
+        
+      <script>
+        
+        tinymce.init({
+          selector: 'textarea',
+          height: 250,
+          menubar: false,
+          language: 'es',
+          
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar: 'undo redo | formatselect | ' +
+          'bold italic backcolor | alignleft aligncenter ' +
+          'alignright alignjustify | bullist numlist outdent indent | ' +
+          'removeformat | help',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+          content_langs: [
+          { title: 'Spanish', code: 'es' },
+        ]          
+        });
 
+
+      </script>
 
 
     </body>    
