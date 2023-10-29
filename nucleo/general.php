@@ -16,8 +16,7 @@
 
 			if(isset($_SESSION["user"]))
 			{
-				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);
-				
+				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);				
 				$this->words["html_sesion"]		="
 					<a href=\"../../&sys_action=cerrar_sesion\" style=\"color:#fff;\">Cerrar Sesion</a>
 				";
@@ -25,8 +24,6 @@
 			else
 			{
 				$this->words["html_sesion"]		="<a href=\"../../Sesion/Create/\" style=\"color:#fff;\">Logeate</a>";
-				
-
 			}
 
 			if(isset($_FILES["files"]))
@@ -141,7 +138,7 @@
 									$th				=$im;
 
 									// thumb
-									$redimencion	=$this->__REDIMENSION(350, $width, $height);
+									$redimencion	=$this->__REDIMENSION(180, $width, $height);
 									$width 			= $redimencion[1];
 									$height 		= $redimencion[0];	
 									$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
@@ -170,21 +167,19 @@
 		}		
 		public function __REDIMENSION($maximo, $width, $height)
     	{    	
-			if($width > $height)
+			if($width > $maximo)
 			{
-				$newHeight = $maximo;
-				$newWidth = ($maximo / $height) * $width;
-			}else{
-				$newWidth = $maximo;
-				$newHeight = ($maximo / $width) * $height;
-			}
-			if($newHeight>$maximo)
+				$aux	=$width;
+				$width	=$maximo;
+				$height	=($maximo * $height) / $aux;  		
+			}			
+			if($height>$maximo)
 			{
-				$newHeight2 = $newHeight;
-				$newHeight = $maximo;
-				$newWidth = ($maximo / $newHeight2) * $newWidth;
+				$aux	=$height;
+				$height	=$maximo;
+				$width	=($maximo * $width) / $aux;  		
 			}
-			return array(round($newHeight), round($newWidth));
+			return array(round($height), round($width));
 		}		
 
 

@@ -61,8 +61,8 @@
 					$words_perfil				=$this->__PERFIL_DATA($row);
 
 					$words_template=array(
-						"events_title"			=>$row["title"],
-						"events_description"	=>$row["description"],
+						#"events_title"			=>$row["title"],
+						#"events_description"	=>$row["description"],
 						"evento" 				=>$_REQUEST["event"],
 						"index"					=>$id
 					);		
