@@ -100,6 +100,35 @@
 
 
 
+
+          $("div.cargar ").on( "click", function() {
+            
+
+            tinymce.init({
+              selector: 'textarea',
+              height: 250,
+              menubar: false,
+              language: 'es',          
+              plugins: [
+                'advlist autolink lists link charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar: 'undo redo | bold italic backcolor | ' +
+              'alignleft aligncenter alignright alignjustify |' +
+              ' outdent indent | removeformat ',
+              
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            });
+    
+
+          } );
+
+
+
+
+
+
         });
 
 
@@ -121,7 +150,9 @@
       
         
       <script>
+
         
+        /*
         tinymce.init({
           selector: 'textarea',
           height: 250,
@@ -129,20 +160,20 @@
           language: 'es',
           
           plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
+            'advlist autolink lists link image code charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',
             'insertdatetime media table paste code help wordcount'
           ],
-          toolbar: 'undo redo | formatselect | ' +
+          toolbar: 'undo redo | image code | formatselect | ' +
           'bold italic backcolor | alignleft aligncenter ' +
           'alignright alignjustify | bullist numlist outdent indent | ' +
-          'removeformat | help',
+          'removeformat ',
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
           content_langs: [
           { title: 'Spanish', code: 'es' },
         ]          
         });
-
+          */
 
       </script>
 
