@@ -65,7 +65,7 @@
 				foreach($files as $file)
 				{
 					$path="../../modulos/files/file/";
-					$archivo =$path . "file_" . md5($file["id"]) . "_th." . $file["extension"];
+					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
 
 					$words_event["events_id"] 	=md5($row["event_id"]);					
 					$words_event["file$rows"] 	=md5($file["id"]);					
