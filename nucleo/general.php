@@ -28,7 +28,7 @@
 
 			if(isset($_FILES["files"]))
 			{	
-				$this->__PRINT_R($_REQUEST);
+				
 				$comando_sql	="INSERT INTO events (user_id, type, datetime_show, datetime, title, description)
 					VALUES( 
 						'1', 
