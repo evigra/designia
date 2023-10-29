@@ -51,7 +51,6 @@
 
 				$words_perfil				=$this->__PERFIL_DATA($row);
 				$words_event=array(
-					"events_id"				=>md5($row["event_id"]),
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos/galeria_fotos_" . random_int(1, $archivos), $words_perfil),					
 					"events_title"			=>$row["title"],
@@ -65,6 +64,10 @@
 					$path="../../modulos/files/file/";
 					$archivo =$path . "file_" . md5($file["id"]) . "_th." . $file["extension"];
 
+					$words_event["events_id"] 	=md5($row["event_id"]);					
+					$words_event["file$rows"] 	=md5($file["id"]);					
+
+					
 					if($file["extension"]=="jpg")
 					{
 						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							
