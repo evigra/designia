@@ -3,12 +3,12 @@
 	{    
 		public function __SYS_DB()
 		{  
-			if($this->words["server"]=="designia.localhost")
+			if($_REQUEST["server"]=="designia.localhost")
 			{
 				$host	="localhost";
 				$db		="produccion";
 			}
-			if($this->words["server"]=="designia.vip")
+			if($_REQUEST["server"]=="designia.vip")
 			{
 				if($this->words["user"]=="developer")
 				{

@@ -50,6 +50,10 @@
                 $("form").submit();		
               }
             );		
+            if($("div.tox-statusbar").length>0)
+            {
+              $("div.tox-statusbar").hide();
+            }
             
                         
           }	    
@@ -120,7 +124,7 @@
               
               content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             });
-    
+            
 
           } );
 
