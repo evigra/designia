@@ -1,15 +1,28 @@
 <?php		
+
+
+
+//setcookie('designia','',time() - 1);
+	/*
 	if(!isset($_SESSION))
 	{
 		$usuarios_sesion						="PHPSESSID";
 		session_name($usuarios_sesion);
-		@session_start();
-		@session_cache_limiter('nocache,private');			
-		/*
-		if(count($_COOKIE) > 0 AND isset($_COOKIE["solesgps"])) 
-			$_SESSION=$_COOKIE["solesgps"];
-		*/		
+		session_start();
+		session_cache_limiter('nocache,private');			
 	}
+	
+	if(isset($_COOKIE["designia"]))
+	{
+		$usuarios_sesion						="PHPSESSID";
+		session_name($usuarios_sesion);
+		session_start();
+		session_cache_limiter('nocache,private');			
+	}
+#*/
+
+
+
 	
 	if($_REQUEST["datos"])	
 	{		
@@ -45,27 +58,50 @@
 
 		unset($_REQUEST["datos"]);
 	}
-	
-	if(!isset($_SESSION))		$_SESSION=array();
-	
-	if(isset($_SESSION))
-	{
 
-		
-		if(!isset($_SESSION["var"]))			$_SESSION["var"]					=array();
-						
-		$_SESSION["var"]["false"]			=array(0,"0","false", "no");
-		$_SESSION["var"]["true"]			=array(1,"1","true", "yes","si");
-		$_SESSION["var"]["server_true"]		=array("www.solesgps.com","solesgps.com","www.soluciones-satelitales.com","soluciones-satelitales.com");
-		$_SESSION["var"]["server_error"]	=array("localhost","developer.solesgps.com");		
-		$_SESSION["var"]["server"]			=array_merge($_SESSION["var"]["server_true"], $_SESSION["var"]["server_error"]);
-			
-		if(@$_GET["sys_action"]=="cerrar_sesion")
+
+	if(isset($_COOKIE["designia"]))
+	{
+		setcookie("designia", $_COOKIE["designia"], time()+ (60 * 60 * 24 *7), "/", $_REQUEST["server"]);
+
+		if(!isset($_SESSION))
 		{
-			session_destroy();
-			//$destino= "designia.vip";	
-			Header ("Location: http://{$_REQUEST["server"]}/Sociales/Show/");			
-		}	
+			$usuarios_sesion						="PHPSESSID";
+			session_name($usuarios_sesion);
+			session_start();
+			#session_cache_limiter('nocache,private');			
+		}
+
+		if(!isset($_SESSION["user"]))
+		{
+
+			$path_model="modulos/Sesion/modelo.php";		
+			require_once($path_model);			
+			$objeto			=new sesion();
+			$objeto->__COOKIE();			
+		}
+
+	
 	}
+
+	
+
+
+	if(@$_GET["sys_action"]=="cerrar_sesion")
+	{
+		if(isset($_SESSION))
+		{			
+			session_destroy();			
+		}	
+		if(isset($_COOKIE))
+		{				
+			
+			setcookie("designia", $_COOKIE["designia"], time() - (3600), "/", $_REQUEST["server"]);
+			unset($_COOKIE['designia']);
+			//setcookie("designia", "", time() - 3600, "/");
+		}	
+		Header ("Location: http://{$_REQUEST["server"]}/Sociales/Show/");			
+	}
+	
 	$pre_path="";	
 ?>

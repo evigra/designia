@@ -20,7 +20,6 @@
         <!--
         <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
         -->
-        
     </head>
     <body>
       <form action="" method="POST" enctype="multipart/form-data">	
@@ -30,12 +29,9 @@
       <script src="../../sitio_web/js/jquery.js"></script>
       <script src="../../sitio_web/js/jquery-ui.js"></script>
 
-
       <script>
         $(document).ready(function()
-        {
-      
-
+        {       
           if($("font#accion").length>0)
           {
             $("font#accion").button()
@@ -44,24 +40,15 @@
                 $(this).attr('disabled', true);
                 $(this).html('Cargando'); 
                 
-                //$(this).prop('disabled', true);
-                //$(this).prop('text', 'algo');
-                //$(this).value('Emviando Datos');        
                 $("form").submit();		
               }
             );		
             if($("div.tox-statusbar").length>0)
             {
               $("div.tox-statusbar").hide();
-            }
-            
-                        
+            }                                    
           }	    
 
-
-
-
-          
           function varias(active, next)
           {
 
@@ -79,35 +66,25 @@
 
             var active  =$(next);
             var next    =$(active).next();
-
-            //varias(active, next);
-
           }
 
           
           if($(".portada").length>0)
           {
-
-
             var active  =$(".portada").first();
             var next    =$(active).next();
             varias(active, next);
-
-         
           }
-
 
           if($("div.developer").length>0)
           {
-            $("div.developer").dialog();
+            $("div.developer").dialog({width:700});
           }	    
 
 
 
 
-          $("div.cargar ").on( "click", function() {
-            
-
+          $("div.cargar ").on( "click", function() {            
             tinymce.init({
               selector: 'textarea',
               height: 250,
@@ -129,58 +106,10 @@
           } );
 
 
-
-
-
-
         });
 
-
-
-
-
-
-
-
-
-
-
-
-        
+       
       </script>
-
-
-      
-      
-        
-      <script>
-
-        
-        /*
-        tinymce.init({
-          selector: 'textarea',
-          height: 250,
-          menubar: false,
-          language: 'es',
-          
-          plugins: [
-            'advlist autolink lists link image code charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-          ],
-          toolbar: 'undo redo | image code | formatselect | ' +
-          'bold italic backcolor | alignleft aligncenter ' +
-          'alignright alignjustify | bullist numlist outdent indent | ' +
-          'removeformat ',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-          content_langs: [
-          { title: 'Spanish', code: 'es' },
-        ]          
-        });
-          */
-
-      </script>
-
 
     </body>    
 </html>

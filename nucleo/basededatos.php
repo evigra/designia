@@ -62,9 +62,9 @@
 		    }	
 		}	
 
-		public function __PRINT_R($variable)
+		public function __PRINT_R($variable, $title=NULL)
 		{  
-		    echo "<div class=\"developer\" title=\"Sistema\"><pre>";
+		    echo "<div class=\"developer\" title=\"Sistema $title\"><pre>";
 		    @print_r(@$variable);
 		    echo "</pre></div>";		    			
     	} 

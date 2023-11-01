@@ -13,6 +13,8 @@
 			$this->words["path"]			=$_REQUEST["path"];
 			$this->__FILES_DATA				=array();	
 
+			#$this->__PRINT_R(@$_SESSION, "_SESSION");
+			#$this->__PRINT_R(@$_COOKIE, "_COOKIE");
 
 			if(isset($_SESSION["user"]))
 			{
@@ -160,9 +162,7 @@
 			foreach($this->__FILES_DATA as $row=>$file)
 			{
 				$vtype			=explode("/", $file["type"]);
-				$type			=$vtype[0];
-
-				
+				$type			=$vtype[0];				
 			}
 
 		}		
