@@ -99,7 +99,7 @@
 			unset($_COOKIE['designia']);
 			//setcookie("designia", "", time() - 3600, "/");
 		}	
-		Header ("Location: http://www." . $_REQUEST["server"] . "/Sociales/Show/");			
+		Header ("Location: http://" . $_REQUEST["user"] . "." . $_REQUEST["server"] . "/Chilaquil/Show/");			
 	}
 	
 	$pre_path="";	
