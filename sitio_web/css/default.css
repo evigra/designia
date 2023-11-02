@@ -22,7 +22,10 @@
 }
 
 
-
+div.menu_imagen, menu_texto{
+	width:				auto;
+	display:inline-block
+}
 
 @media (orientation: portrait)
 {
@@ -36,7 +39,23 @@
 		border-radius:		6px;
 		height:				50px;
 	}
-	
+	.menu_texto{
+		visibility: 		hidden;
+		width: 				0px;
+		float: 				left;
+	}			
+	div.menu_imagen{
+		padding:			0px;
+	}
+	div.menu_texto{		
+		padding:			0px;
+	}
+
+	img.menu_imagen{		
+		width: 				50px;
+		padding:			0px 30px ;
+	}
+
 }
 @media (orientation:landscape)
 {
@@ -49,5 +68,11 @@
 		border-radius:		6px;
 		height:				30px;
 	}
-	
+	div.menu_imagen{		
+		padding:			0px 5px 0px 50px;
+	}
+	img.menu_imagen{		
+		width: 				20px;
+	}
+
 }

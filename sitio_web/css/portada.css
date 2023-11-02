@@ -17,6 +17,10 @@
 /* ####################################### */
 /* ######      DESKTOP MEDIO        ###### */
 /* ####################################### */
+
+div.menu_imagen, div.menu_texto{
+	float:				left;
+}
 @media (orientation: portrait)
 {
 	#body_center
@@ -44,6 +48,23 @@
 	a{
 		font-size:			30px; 
 	}
+	.menu_texto{
+		visibility: 		hidden;
+		width: 				0px;
+		float: 				left;
+	}			
+	div.menu_imagen{
+		padding:			0px;
+	}
+	div.menu_texto{		
+		padding:			0px;
+	}
+
+	img.menu_imagen{		
+		width: 				60px;
+		padding:			0px 30px ;
+	}
+
 }
 @media (orientation:landscape)
 {
@@ -72,5 +93,11 @@
 	}	
 	a{
 		font-size:			15px; 
+	}
+	div.menu_imagen{		
+		padding:			0px 5px 0px 50px;
+	}
+	img.menu_imagen{		
+		width: 				20px;
 	}
 }
