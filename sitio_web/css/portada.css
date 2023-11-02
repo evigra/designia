@@ -18,8 +18,9 @@
 /* ######      DESKTOP MEDIO        ###### */
 /* ####################################### */
 
-div.menu_imagen, div.menu_texto{
-	float:				left;
+div.menu_imagen, .menu_texto{
+	width:				auto;
+	display:inline-block
 }
 @media (orientation: portrait)
 {
@@ -61,7 +62,7 @@ div.menu_imagen, div.menu_texto{
 	}
 
 	img.menu_imagen{		
-		width: 				60px;
+		width: 				50px;
 		padding:			0px 30px ;
 	}
 

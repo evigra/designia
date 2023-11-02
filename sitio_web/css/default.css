@@ -22,7 +22,7 @@
 }
 
 
-div.menu_imagen, menu_texto{
+div.menu_imagen, .menu_texto{
 	width:				auto;
 	display:inline-block
 }
