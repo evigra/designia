@@ -20,7 +20,7 @@
 			{
 				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);				
 				$this->words["html_sesion"]		="
-					<a href=\"../../&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
+					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
 						<div class=\"menu_imagen\"><img class=\"menu_imagen\" src=\"../../salida.png\" >  </div>
 						<div class=\"menu_texto\">Cerrar Sesion</div>
 					</a>
