@@ -94,13 +94,12 @@
 			session_destroy();			
 		}	
 		if(isset($_COOKIE))
-		{				
-			
+		{							
 			setcookie("designia", $_COOKIE["designia"], time() - (3600), "/", $_REQUEST["server"]);
 			unset($_COOKIE['designia']);
 			//setcookie("designia", "", time() - 3600, "/");
 		}	
-		Header ("Location: http://{$_REQUEST["server"]}/Sociales/Show/");			
+		Header ("Location: http://www." . $_REQUEST["server"] . "/Sociales/Show/");			
 	}
 	
 	$pre_path="";	
