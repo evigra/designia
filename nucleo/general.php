@@ -88,53 +88,14 @@
 				
 								if($type=="image")
 								{	
-									$im 			= new imagick($temporal);
-					
-									$matrizExif = $im->getImageProperties("exif:*");
-
-									$imageprops 	= $im->getImageGeometry();
-									$width 			= $imageprops['width'];
-									$height 		= $imageprops['height'];
-
-									$redimencion	=$this->__REDIMENSION(700, $width, $height);
-
-									$newWidth 			= $redimencion[1];
-									$newHeight 		= $redimencion[0];	
-									$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);					
-				
-									$logo = new Imagick();
-									$logo->readImage("logo.png") or die("Couldn't load $logo");
-				
-									if(@$matrizExif["exif:Orientation"]==1)
-									{
-										$orientation 	= "horizontal";										
-									}
-
-									if(@$matrizExif["exif:Orientation"]==6)
-									{
-										$width 			= $newHeight;
-										$height 		= $newWidth;	
-	
-										$orientation 	= "vertical";
-										$logo->rotateimage(new ImagickPixel(), 270);
-									}
-									if(@$matrizExif["exif:Orientation"]==8)
-									{
-										$width 			= $newHeight;
-										$height 		= $newWidth;	
-
-										$orientation 	= "vertical";
-										$logo->rotateimage(new ImagickPixel(), 90);
-									}
-
-									if($orientation=="")
-									{
-										if($height>$width)	$orientation 	= "vertical";
-										else				$orientation 	= "horizontal";
-									}
+									$data_im			=$this->__PROCESS_IMG($tempora);
 									
-									#$im->compositeImage($logo, imagick::COMPOSITE_OVER, 0, 0);								
+									$im					=$data_im["im"];
+									$width				=$data_im["width"];
+									$height				=$data_im["height"];
+									$orientation		=$data_im["orientation"];
 								}
+					
 
 								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
 								VALUES(	
@@ -148,12 +109,12 @@
 								)";
 								$file_id					=$this->__EXECUTE($comando_sql);					
 
-								$archivo 					=$path . "file_" . md5($file_id) . "." . $extencion;
+								$archivo 					=$path . "file_" . md5($file_id) . ".";
 
 								if($type=="image")			
 								{
 									// redimencionada
-									$im->writeImage( $archivo );	
+									$im->writeImage( $archivo . $extencion );	
 									$th				=$im;
 
 									// thumb
@@ -165,13 +126,44 @@
 									$archivo 		=$path . "file_" . md5($file_id) . "_th." . $extencion;
 									$th->writeImage( $archivo );
 								}
-								else if($type=="video")		move_uploaded_file($temporal, $archivo);
+								else if($type=="video")		
+								{
+									require 'nucleo/vendor/autoload.php';
+								
+									$ffmpeg = FFMpeg\FFMpeg::create();
+									$video = $ffmpeg->open($temporal);
+
+									$video
+										->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(10))
+										->save($archivo . "jpg");
+
+									$data_im			=$this->__PROCESS_IMG($archivo . "jpg");
+								
+									$im					=$data_im["im"];
+									$width				=$data_im["width"];
+									$height				=$data_im["height"];
+									$orientation		=$data_im["orientation"];
+
+									$im->writeImage( $archivo . "jpg");	
+									
+
+
+
+									$video
+										->filters()
+										->resize(new FFMpeg\Coordinate\Dimension($width, $height))
+										->synchronize();
+									
+									$video
+										->save(new FFMpeg\Format\Video\WebM(), $archivo . "webm");
+								}								
 							}						
 						}	
 					}
 				}				
 			}
 		}
+
 		public function __FILES_COPI()
     	{    	
 			#$this->__PRINT_R($this->__FILES_DATA);
@@ -181,6 +173,59 @@
 				$type			=$vtype[0];				
 			}
 
+		}		
+
+		public function __PROCESS_IMG($temporal)
+    	{    	
+			$im 			= new imagick($temporal);
+					
+			$matrizExif = $im->getImageProperties("exif:*");
+
+			$imageprops 	= $im->getImageGeometry();
+			$width 			= $imageprops['width'];
+			$height 		= $imageprops['height'];
+
+			$redimencion	=$this->__REDIMENSION(700, $width, $height);
+
+			$newWidth 			= $redimencion[1];
+			$newHeight 		= $redimencion[0];	
+			$im->resizeImage($newWidth,$newHeight, imagick::FILTER_LANCZOS, 0.8, true);					
+
+			/*
+			$logo = new Imagick();
+			$logo->readImage("logo.png") or die("Couldn't load $logo");
+			*/
+			if(@$matrizExif["exif:Orientation"]==1)				$orientation 	= "horizontal";										
+			if(@$matrizExif["exif:Orientation"]==6)
+			{
+				$width 			= $newHeight;
+				$height 		= $newWidth;	
+
+				$orientation 	= "vertical";
+				//$logo->rotateimage(new ImagickPixel(), 270);
+			}
+			if(@$matrizExif["exif:Orientation"]==8)
+			{
+				$width 			= $newHeight;
+				$height 		= $newWidth;	
+
+				$orientation 	= "vertical";
+				//$logo->rotateimage(new ImagickPixel(), 90);
+			}
+
+			if($orientation=="")
+			{
+				if($height>$width)	$orientation 	= "vertical";
+				else				$orientation 	= "horizontal";
+			}
+
+			$return=array(
+				"im"			=>$im,
+				"width"			=>$width,
+				"height"		=>$height,
+				"orientation"	=>$orientation,
+			);
+			return $return;
 		}		
 		public function __REDIMENSION($maximo, $width, $height)
     	{    	

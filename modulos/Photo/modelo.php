@@ -54,37 +54,39 @@
 
 					if($_REQUEST["file"]==$md5_file)
 					{
-						$archivo 	=$path . "file_$md5_file." . $file["extension"];
-						$photo	="<img src=\"$archivo\" width=\"100%\">";
+						$archivo 	=$path . "file_$md5_file.";
 
-
+						$photo	="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
 
 						if(in_array($file["extension"], $files_image))
 						{
-							$photo="<img src=\"$archivo\" width=\"100%\">";							
+							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 						}
 						if(in_array($file["extension"], $files_video))
 						{
 							$photo="
-								<div>
-								<video style=\"max-height:600px; max-width:800px; width:100%;\"  controls>
-									<source src=\"$archivo\" type=\"video/mp4\">
+								<video style=\"max-height:600px; max-width:800px; width:100%;\" autoplay controls>
+									<source src=\"$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
-								</video> 												  	
-								</div>
+								</video> 
 							";
 						}
-	
+					}		
+					
+					$archivo 	=$path . "file_$md5_file";
+					
 
+					if(in_array($file["extension"], $files_image))
+					{
+						$archivo	="<img src=\"$archivo"."_th.{$file["extension"]}\">";	
+					}
+					if(in_array($file["extension"], $files_video))
+					{
+						$archivo	="<img src=\"$archivo".".jpg\">";	
 
-					}						
-					$archivo 	=$path . "file_$md5_file" . "_th.". $file["extension"];
-					$archivo	="<img src=\"$archivo\">";	
+					}
 
 					$words_perfil				=$this->__PERFIL_DATA($file);
-				
-
-
 
 					$title="";
 					if($file["title"]!="")		
@@ -96,11 +98,8 @@
 						$title_url				=str_replace("%", "_", $title_url);
 						$title_url				=str_replace("/", "_", $title_url);					
 					}
-					else	$title_url			="Evento ";
+					else	$title_url			="Evento";
 		
-
-
-
 					$words_template=array(
 						#"events_title"			=>$file["title"],
 						#"events_description"	=>$file["description"],
@@ -108,11 +107,7 @@
 						"index"					=>$id,
 						"events_title"			=>$title,
 						"events_title_url"		=>$title_url,
-	
 					);		
-
-
-
 
 					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
 					

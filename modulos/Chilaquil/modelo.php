@@ -53,7 +53,7 @@
 					$title_url				=str_replace("%", "_", $title_url);
 					$title_url				=str_replace("/", "_", $title_url);					
 				}
-				else	$title_url			="Evento ";
+				else	$title_url			="Evento";
 
 				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
 
@@ -77,18 +77,21 @@
 				foreach($files as $file)
 				{
 					$path="../../modulos/files/file/";
-					$archivo =$path . "file_" . md5($file["id"]) . "." . $file["extension"];
+					$archivo =$path . "file_" . md5($file["id"]) . ".";
 
 					$words_event["events_id"] 	=md5($row["event_id"]);					
 					$words_event["file$rows"] 	=md5($file["id"]);	
 					
 					if(in_array($file["extension"], $files_image))
 					{
-						$words_event["archivo".$rows]="<img src=\"$archivo\" width=\"100%\">";							
+						$words_event["archivo".$rows]="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 					}
 					if(in_array($file["extension"], $files_video))
 					{
+						$words_event["archivo".$rows]="<img src=\"$archivo"."jpg\" width=\"100%\">";						
+						/*	
 						$words_event["archivo".$rows]="
+							
 							<div style=\"width:100px; heigth:100px; background-color:red;\">aaa
 								<video  style=\"max-height:600px; max-width:800px;\"  controls>
 									<source src=\"$archivo\" type=\"video/mp4\">
@@ -96,6 +99,7 @@
 								</video> 												  	
 							</div>
 						";
+						*/
 					}
 					$rows++;
 				}
