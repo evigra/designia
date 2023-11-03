@@ -15,6 +15,9 @@
 		}
    		public function __BROWSE()
     	{
+			$files_image				=array("png","jpeg","jpg");
+			$files_video				=array("mp4");
+
 			$words_event=array(
 				"events_title"			=>"Este es el titulo del evento",
 				"events_description"	=>"Aqui apareceria la descipcion del evento",
@@ -42,32 +45,51 @@
 			if($files)
 			{
 				$return	="";	
-				foreach($files as $id =>$row)
+				foreach($files as $id =>$file)
 				{
 					$path="../../modulos/files/file/";
-					$md5_file=md5($row["file_id"]);
+					$md5_file=md5($file["file_id"]);
 
 					$archivo 	="";
 
 					if($_REQUEST["file"]==$md5_file)
 					{
-						$archivo 	=$path . "file_$md5_file." . $row["extension"];
+						$archivo 	=$path . "file_$md5_file." . $file["extension"];
 						$photo	="<img src=\"$archivo\" width=\"100%\">";
+
+
+
+						if(in_array($file["extension"], $files_image))
+						{
+							$photo="<img src=\"$archivo\" width=\"100%\">";							
+						}
+						if(in_array($file["extension"], $files_video))
+						{
+							$photo="
+								<video  style=\"max-height:600px; max-width:800px;\"  controls>
+									<source src=\"$archivo\" type=\"video/mp4\">
+									Your browser does not support the video tag.
+								</video> 												  	
+							";
+						}
+	
+
+
 					}						
-					$archivo 	=$path . "file_$md5_file" . "_th.". $row["extension"];
+					$archivo 	=$path . "file_$md5_file" . "_th.". $file["extension"];
 					$archivo	="<img src=\"$archivo\">";	
 
-					$words_perfil				=$this->__PERFIL_DATA($row);
+					$words_perfil				=$this->__PERFIL_DATA($file);
 				
 
 
 
 					$title="";
-					if($row["title"]!="")		
+					if($file["title"]!="")		
 					{
-						$title					="<h4>{$row["title"]}</h4>";
+						$title					="<h4>{$file["title"]}</h4>";
 		
-						$title_url				=str_replace(" ", "_", $row["title"]);   
+						$title_url				=str_replace(" ", "_", $file["title"]);   
 						$title_url				=urlencode($title_url);
 						$title_url				=str_replace("%", "_", $title_url);
 						$title_url				=str_replace("/", "_", $title_url);					
@@ -78,8 +100,8 @@
 
 
 					$words_template=array(
-						#"events_title"			=>$row["title"],
-						#"events_description"	=>$row["description"],
+						#"events_title"			=>$file["title"],
+						#"events_description"	=>$file["description"],
 						"evento" 				=>$_REQUEST["event"],
 						"index"					=>$id,
 						"events_title"			=>$title,
@@ -100,8 +122,8 @@
 				}
 
 				$words_event=array(
-					"events_title"			=>$row["title"],
-					"events_description"	=>$row["description"],
+					"events_title"			=>$file["title"],
+					"events_description"	=>$file["description"],
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photo"			=>$photo,	
 					"events_photos"			=>$return,
