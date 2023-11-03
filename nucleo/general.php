@@ -21,6 +21,12 @@
 			{
 				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);				
 				$this->words["html_sesion"]		="
+					
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../personas.png\" ></div>
+						<div class=\"menu_texto\" style=\"color:#fff;\" >{$_SESSION["user"]["name"]}</div>
+					
+
+					<div class=\"menu_separador\"></div>
 					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
 						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../salida.png\" ></div>
 						<div class=\"menu_texto\"  >Cerrar</div>
