@@ -30,7 +30,10 @@
 					session_name($usuarios_sesion);
 					session_start();
 					session_cache_limiter('nocache,private');			
-					$_SESSION["user"]=$user[0];										
+					$_SESSION["user"]			=$user[0];										
+					
+
+					$_SESSION["user"]["first_name"]		=explode(" ",$_SESSION["user"]["name"])[0];
 
 					Header ("Location: ../../Chilaquil/Show/");
 				}
@@ -56,7 +59,9 @@
 			$user	=$this->__EXECUTE($comando_sql);								
 			if(isset($user[0]) and isset($user[0]["md5_id"]) and $user[0]["md5_id"]==$_COOKIE["designia"])
 			{				
+
 				$_SESSION["user"]=$user[0];										
+				$_SESSION["user"]["first_name"]		=explode(" ",$_SESSION["user"]["name"])[0];
 			}
 		}		
 	}

@@ -72,9 +72,7 @@
 	$objeto->words["module_center"]             =$module_center;
 	$objeto->words["module_right"]              =$objeto->__BUTTON($module_right);;
 	
-	#if()
 	
-	#$objeto->__PRINT_R($_SESSION["user"]);
 	$objeto->words["html_head_title"]           ="SOLES GPS :: {$_SESSION["company"]["razonSocial"]} :: {$objeto->words["module_title"]}";
 	#*/
 	

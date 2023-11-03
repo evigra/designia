@@ -2,7 +2,7 @@
 	$objeto			=new sociales();
 
 	$objeto->words["html_head_css"]			="default";
-	$objeto->words["html_head_title"]		.="Chilaquil";
+	$objeto->words["html_head_title"]		.="Eventos Sociales";
 	
 	$objeto->words["html_head_description"]	="Esta descripcion";
 	$objeto->words["html_head_keywords"]	="Designia, Designia.vip, Eventos, events";
