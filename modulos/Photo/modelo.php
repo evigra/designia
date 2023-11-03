@@ -66,10 +66,12 @@
 						if(in_array($file["extension"], $files_video))
 						{
 							$photo="
-								<video  style=\"max-height:600px; max-width:800px;\"  controls>
+								<div>
+								<video style=\"max-height:600px; max-width:800px; width:100%;\"  controls>
 									<source src=\"$archivo\" type=\"video/mp4\">
 									Your browser does not support the video tag.
 								</video> 												  	
+								</div>
 							";
 						}
 	

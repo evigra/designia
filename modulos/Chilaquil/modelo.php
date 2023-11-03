@@ -89,10 +89,12 @@
 					if(in_array($file["extension"], $files_video))
 					{
 						$words_event["archivo".$rows]="
-							<video  style=\"max-height:600px; max-width:800px;\"  controls>
-								<source src=\"$archivo\" type=\"video/mp4\">
-								Your browser does not support the video tag.
-							</video> 												  	
+							<div style=\"width:100px; heigth:100px; background-color:red;\">aaa
+								<video  style=\"max-height:600px; max-width:800px;\"  controls>
+									<source src=\"$archivo\" type=\"video/mp4\">
+									Your browser does not support the video tag.
+								</video> 												  	
+							</div>
 						";
 					}
 					$rows++;

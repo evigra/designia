@@ -23,12 +23,12 @@
 				$this->words["html_create"]				=$this->__VIEW_BASE("cargar", $this->words);				
 				
 				$this->words["html_sesion"]				="
-					<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../personas.png\" ></div>
+					<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/personas.png\" ></div>
 					<div class=\"menu_texto\" style=\"color:#fff;\" >{$_SESSION["user"]["name"]}</div>
 					
 					<div class=\"menu_separador\"></div>
 					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
-						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../salida.png\" ></div>
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/salida.png\" ></div>
 						<div class=\"menu_texto\"  >Cerrar</div>
 					</a>
 				";
@@ -38,7 +38,7 @@
 			{
 				$this->words["html_sesion"]		="
 					<a href=\"../../Sesion/Create/\" style=\"color:#fff;\"> 						
-						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../entrada.png\" ></div>
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/entrada.png\" ></div>
 						<div class=\"menu_texto\" >Login</div>
 					</a>
 				";
