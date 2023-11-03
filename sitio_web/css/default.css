@@ -13,22 +13,21 @@
 	--fuente_color3: 	#174950;
 
 }
-#body_center
-{
-	z-index:			20; 
-	position:			absolute; 
-	top:				50px; 
-	width:				100%;
-}
 
 
-div.menu_imagen, .menu_texto{
-	width:				auto;
-	display:inline-block
-}
 
+/* celular secciones */
 @media (orientation: portrait)
 {
+
+	#body_center
+	{
+		z-index:			20; 
+		position:			absolute; 
+		top:				90px; 
+		width:				100%;
+		height:				10px;
+	}
 	a{
 		font-size:			30px; 
 	}
@@ -40,25 +39,37 @@ div.menu_imagen, .menu_texto{
 		height:				50px;
 	}
 	.menu_texto{
-		visibility: 		hidden;
-		width: 				0px;
-		float: 				left;
+		display: 			none;
+		overflow: 			hidden;
 	}			
 	div.menu_imagen{
-		padding:			0px;
+		width:				auto;
+		display:			inline;
 	}
-	div.menu_texto{		
-		padding:			0px;
-	}
-
-	img.menu_imagen{		
+	
+	div.menu_separador{		
 		width: 				50px;
-		padding:			0px 30px ;
+		display:			inline-block ;
+	}
+	
+	img.menu_imagen{		
+		width: 				60px;
 	}
 
 }
+
+/* computadora secciones */
 @media (orientation:landscape)
 {
+	#body_center
+	{
+		z-index:			20; 
+		position:			absolute; 
+		top:				40px; 
+		width:				100%;
+		height:				10px;
+	}
+
 	a{
 		font-size:			15px; 
 	}
@@ -68,9 +79,20 @@ div.menu_imagen, .menu_texto{
 		border-radius:		6px;
 		height:				30px;
 	}
-	div.menu_imagen{		
-		padding:			0px 5px 0px 50px;
+	.menu_texto{
+		display: 			inline-block ;
+		
+	}			
+	div.menu_imagen{
+		width:				auto;
+		display:			inline;
 	}
+	
+	div.menu_separador{		
+		width: 				25px;
+		display:			inline-block ;
+	}
+	
 	img.menu_imagen{		
 		width: 				20px;
 	}

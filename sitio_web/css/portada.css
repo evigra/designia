@@ -18,19 +18,15 @@
 /* ######      DESKTOP MEDIO        ###### */
 /* ####################################### */
 
-div.menu_imagen, .menu_texto{
-	width:				auto;
-	display:inline-block
-}
+/* celular portada */
 @media (orientation: portrait)
 {
 	#body_center
 	{
 		z-index:			20; 
-		position:			fixed; 
-		top:				68px; 
+		position:			absolute; 
+		top:				90px; 
 		width:				100%;
-		height: 			100%;
 	}
 	
 
@@ -50,23 +46,25 @@ div.menu_imagen, .menu_texto{
 		font-size:			30px; 
 	}
 	.menu_texto{
-		visibility: 		hidden;
-		width: 				0px;
-		float: 				left;
+		display: 			none;
+		overflow: 			hidden;
 	}			
 	div.menu_imagen{
-		padding:			0px;
+		width:				auto;
+		display:			inline;
 	}
-	div.menu_texto{		
-		padding:			0px;
-	}
-
-	img.menu_imagen{		
+	
+	div.menu_separador{		
 		width: 				50px;
-		padding:			0px 30px ;
+		display:			inline-block ;
+	}
+	
+	img.menu_imagen{		
+		width: 				60px;
 	}
 
 }
+/* computadora portada */
 @media (orientation:landscape)
 {
 
@@ -74,7 +72,7 @@ div.menu_imagen, .menu_texto{
 	{
 		z-index:			20; 
 		position:			fixed; 
-		top:				50px; 
+		top:				55px; 
 		left:				calc(100% /7); 
 		width:				100%;
 		height: 			100%;
@@ -95,9 +93,20 @@ div.menu_imagen, .menu_texto{
 	a{
 		font-size:			15px; 
 	}
-	div.menu_imagen{		
-		padding:			0px 5px 0px 50px;
+	.menu_texto{
+		display: 			inline-block ;
+		
+	}			
+	div.menu_imagen{
+		width:				auto;
+		display:			inline;
 	}
+	
+	div.menu_separador{		
+		width: 				25px;
+		display:			inline-block ;
+	}
+	
 	img.menu_imagen{		
 		width: 				20px;
 	}

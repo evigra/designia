@@ -16,13 +16,14 @@
 			#$this->__PRINT_R(@$_SESSION, "_SESSION");
 			#$this->__PRINT_R(@$_COOKIE, "_COOKIE");
 
+			
 			if(isset($_SESSION["user"]))
 			{
 				$this->words["html_create"]		=$this->__VIEW_BASE("cargar", $this->words);				
 				$this->words["html_sesion"]		="
 					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
-						<div class=\"menu_imagen\"><img class=\"menu_imagen\" src=\"../../salida.png\" >  </div>
-						<div class=\"menu_texto\">Cerrar Sesion</div>
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../salida.png\" ></div>
+						<div class=\"menu_texto\"  >Cerrar</div>
 					</a>
 				";
 
@@ -31,8 +32,8 @@
 			{
 				$this->words["html_sesion"]		="
 					<a href=\"../../Sesion/Create/\" style=\"color:#fff;\"> 						
-						<div class=\"menu_imagen\"><img class=\"menu_imagen\" src=\"../../entrada.png\" >  </div>
-						<div class=\"menu_texto\">Login</div>
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../entrada.png\" ></div>
+						<div class=\"menu_texto\" >Login</div>
 					</a>
 				";
 			}
