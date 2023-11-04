@@ -82,7 +82,7 @@
 					}
 					if(in_array($file["extension"], $files_video))
 					{
-						$archivo	="<img src=\"$archivo".".jpg\">";	
+						$archivo	="<img src=\"$archivo"."_th.jpg\">";	
 
 					}
 

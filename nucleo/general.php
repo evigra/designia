@@ -79,16 +79,32 @@
 								$orientation 	= "";
 
 								$temporal		=$_FILES["files"]["tmp_name"][$row];
+								$temporal_img	=$temporal;
 
 								$vname			=explode(".", $_FILES["files"]["name"][$row]);
 								$extencion		=$vname[count($vname)-1];
+								$extencion_img	=$extencion;
 
 								$vtype			=explode("/", $_FILES["files"]["type"][$row]);
 								$type			=$vtype[0];
-				
-								if($type=="image")
+
+								if($type=="video")		
+								{
+									require 'nucleo/vendor/autoload.php';
+								
+									$ffmpeg 			= FFMpeg\FFMpeg::create();
+									$video 				= $ffmpeg->open($temporal);
+
+									$temporal_img		=$temporal . "jpg";
+									$extencion_img		="jpg";
+									$video
+										->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(10))
+										->save($temporal_img );
+								}
+								
+								//if($type=="image")
 								{	
-									$data_im			=$this->__PROCESS_IMG($tempora);
+									$data_im			=$this->__PROCESS_IMG($temporal_img);
 									
 									$im					=$data_im["im"];
 									$width				=$data_im["width"];
@@ -96,7 +112,6 @@
 									$orientation		=$data_im["orientation"];
 								}
 					
-
 								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
 								VALUES(	
 									'$events_id', 
@@ -108,46 +123,10 @@
 									'" . $orientation . "'
 								)";
 								$file_id					=$this->__EXECUTE($comando_sql);					
-
-								$archivo 					=$path . "file_" . md5($file_id) . ".";
-
-								if($type=="image")			
-								{
-									// redimencionada
-									$im->writeImage( $archivo . $extencion );	
-									$th				=$im;
-
-									// thumb
-									$redimencion	=$this->__REDIMENSION(180, $width, $height);
-									$width 			= $redimencion[1];
-									$height 		= $redimencion[0];	
-									$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
-
-									$archivo 		=$path . "file_" . md5($file_id) . "_th." . $extencion;
-									$th->writeImage( $archivo );
-								}
-								else if($type=="video")		
-								{
-									require 'nucleo/vendor/autoload.php';
 								
-									$ffmpeg = FFMpeg\FFMpeg::create();
-									$video = $ffmpeg->open($temporal);
-
-									$video
-										->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(10))
-										->save($archivo . "jpg");
-
-									$data_im			=$this->__PROCESS_IMG($archivo . "jpg");
-								
-									$im					=$data_im["im"];
-									$width				=$data_im["width"];
-									$height				=$data_im["height"];
-									$orientation		=$data_im["orientation"];
-
-									$im->writeImage( $archivo . "jpg");	
-									
-
-
+								if($type=="video")		
+								{
+									$archivo 		=$path . "file_" . md5($file_id) . ".";
 
 									$video
 										->filters()
@@ -156,7 +135,25 @@
 									
 									$video
 										->save(new FFMpeg\Format\Video\WebM(), $archivo . "webm");
-								}								
+								}
+								$archivo 					=$path . "file_" . md5($file_id) . ".";
+
+								//if($type=="image")			
+								{
+									// redimencionada
+									$im->writeImage( $archivo . $extencion_img );	
+									$th				=$im;
+
+									// thumb
+									$redimencion	=$this->__REDIMENSION(180, $width, $height);
+									$width 			= $redimencion[1];
+									$height 		= $redimencion[0];	
+									$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
+
+									$archivo_img 		=$path . "file_" . md5($file_id) . "_th." . $extencion_img;
+									$th->writeImage( $archivo_img );
+								}
+								
 							}						
 						}	
 					}
