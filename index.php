@@ -15,15 +15,5 @@
 		require_once($path_index);			
 	}
 	else
-		echo "ERROR";
-	
-
-	/*
-	echo "<pre>";
-	#print_r($_REQUEST);
-	print_r($_FILES);
-	print_r($objeto->__FILES_DATA);
-	
-	echo "</pre>";
-	#*/
+		echo "ERROR: La pagina que ingresaste no existe";	
 ?>

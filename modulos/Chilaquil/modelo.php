@@ -55,11 +55,11 @@
 				}
 				else	$title_url			="Evento";
 
-				if($row["description"]!="")	$row["description"]	="<span>{$row["description"]}</span>";
+				//if($row["description"]!="")	$row["description"]	=$row["description"];
 
 				$archivos					=count($files);
 
-				if($archivos>2)	$archivos=3;
+				if($archivos>2)				$archivos=3;
 				else if($archivos==0)		$archivos=1;	
 
 				$words_perfil				=$this->__PERFIL_DATA($row);
@@ -76,31 +76,16 @@
 				$rows=1;
 				foreach($files as $file)
 				{
-					$path="../../modulos/files/file/";
-					$archivo =$path . "file_" . md5($file["id"]) . ".";
+					$path									="../../modulos/files/file/";
+					$archivo 								=$path . "file_" . md5($file["id"]) . ".";
 
-					$words_event["events_id"] 	=md5($row["event_id"]);					
-					$words_event["file$rows"] 	=md5($file["id"]);	
+					$words_event["events_id"] 				=md5($row["event_id"]);					
+					$words_event["file$rows"] 				=md5($file["id"]);	
 					
 					if(in_array($file["extension"], $files_image))
-					{
-						$words_event["archivo".$rows]="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
-					}
+						$words_event["archivo".$rows]		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 					if(in_array($file["extension"], $files_video))
-					{
-						$words_event["archivo".$rows]="<img src=\"$archivo"."jpg\" width=\"100%\">";						
-						/*	
-						$words_event["archivo".$rows]="
-							
-							<div style=\"width:100px; heigth:100px; background-color:red;\">aaa
-								<video  style=\"max-height:600px; max-width:800px;\"  controls>
-									<source src=\"$archivo\" type=\"video/mp4\">
-									Your browser does not support the video tag.
-								</video> 												  	
-							</div>
-						";
-						*/
-					}
+						$words_event["archivo".$rows]		="<img src=\"$archivo"."jpg\" width=\"100%\">";						
 					$rows++;
 				}
 

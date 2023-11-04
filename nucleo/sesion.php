@@ -1,35 +1,12 @@
 <?php		
-
-
-
-//setcookie('designia','',time() - 1);
-	/*
-	if(!isset($_SESSION))
-	{
-		$usuarios_sesion						="PHPSESSID";
-		session_name($usuarios_sesion);
-		session_start();
-		session_cache_limiter('nocache,private');			
-	}
-	
-	if(isset($_COOKIE["designia"]))
-	{
-		$usuarios_sesion						="PHPSESSID";
-		session_name($usuarios_sesion);
-		session_start();
-		session_cache_limiter('nocache,private');			
-	}
-#*/
-
-
-
 	
 	if($_REQUEST["datos"])	
 	{		
 		$vdatos								=explode(":", $_REQUEST["datos"]);
 		$_REQUEST["user"]					=$vdatos[0];
 
-		if(@$vdatos[1]=="")					$vdatos[1]="Portada/Show/";
+		//if(@$vdatos[1]=="")					$vdatos[1]="Portada/Show/";
+		if(@$vdatos[1]=="")					$vdatos[1]="Chilaquil/Show/";
 		if($vdatos[1]!="")	
 		{
 			$vpath							=explode("/", $vdatos[1]);	

@@ -12,10 +12,6 @@
 			$this->words["user"]			=$_REQUEST["user"];
 			$this->words["path"]			=$_REQUEST["path"];
 			$this->__FILES_DATA				=array();	
-
-			#$this->__PRINT_R(@$_SESSION, "_SESSION");
-			#$this->__PRINT_R(@$_COOKIE, "_COOKIE");
-
 			
 			if(isset($_SESSION["user"]))
 			{
@@ -32,7 +28,6 @@
 						<div class=\"menu_texto\"  >Cerrar</div>
 					</a>
 				";
-
 			}
 			else
 			{
@@ -57,8 +52,7 @@
 						'" . $_REQUEST["description"]. "'
 					)
 				";
-					
-				#$this->__PRINT_R($_FILES["files"]);
+									
 				foreach($_FILES["files"] as $field => $values)
 				{		        
 					foreach($values as $row => $data) 
@@ -71,7 +65,7 @@
 							if($field=="name")
 							{
 								$path="modulos/files/file/";
-								###
+
 								if(!isset($events_id)) $events_id			=$this->__EXECUTE($comando_sql);
 
 								$newHeight 		= 0;
@@ -90,8 +84,7 @@
 
 								if($type=="video")		
 								{
-									require 'nucleo/vendor/autoload.php';
-								
+									require 'nucleo/vendor/autoload.php';								
 									$ffmpeg 			= FFMpeg\FFMpeg::create();
 									$video 				= $ffmpeg->open($temporal);
 
@@ -102,17 +95,13 @@
 										->save($temporal_img );
 								}
 								
-								//if($type=="image")
-								{	
-									$data_im			=$this->__PROCESS_IMG($temporal_img);
-									
-									$im					=$data_im["im"];
-									$width				=$data_im["width"];
-									$height				=$data_im["height"];
-									$orientation		=$data_im["orientation"];
-								}
+								$data_im			=$this->__PROCESS_IMG($temporal_img);							
+								$im					=$data_im["im"];
+								$width				=$data_im["width"];
+								$height				=$data_im["height"];
+								$orientation		=$data_im["orientation"];
 					
-								$comando_sql	="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
+								$comando_sql		="INSERT INTO files (event_id, user_id, extension, temp, height, width,orientation)
 								VALUES(	
 									'$events_id', 
 									'1', 
@@ -122,37 +111,30 @@
 									'" . $width . "',
 									'" . $orientation . "'
 								)";
-								$file_id					=$this->__EXECUTE($comando_sql);					
-								
+								$file_id			=$this->__EXECUTE($comando_sql);													
+								$archivo 			=$path . "file_" . md5($file_id);
 								if($type=="video")		
 								{
-									$archivo 		=$path . "file_" . md5($file_id) . ".";
-
 									$video
 										->filters()
 										->resize(new FFMpeg\Coordinate\Dimension($width, $height))
-										->synchronize();
-									
+										->synchronize();									
 									$video
-										->save(new FFMpeg\Format\Video\WebM(), $archivo . "webm");
+										->save(new FFMpeg\Format\Video\WebM(), $archivo.".webm");
 								}
-								$archivo 					=$path . "file_" . md5($file_id) . ".";
+								
+								// redimencionada
+								$im->writeImage($archivo.".".$extencion_img );	
+								$th				=$im;
 
-								//if($type=="image")			
-								{
-									// redimencionada
-									$im->writeImage( $archivo . $extencion_img );	
-									$th				=$im;
+								// thumb
+								$redimencion	=$this->__REDIMENSION(180, $width, $height);								
+								$height 		= $redimencion[0];	
+								$width 			= $redimencion[1];								
+								$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
 
-									// thumb
-									$redimencion	=$this->__REDIMENSION(180, $width, $height);
-									$width 			= $redimencion[1];
-									$height 		= $redimencion[0];	
-									$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
-
-									$archivo_img 		=$path . "file_" . md5($file_id) . "_th." . $extencion_img;
-									$th->writeImage( $archivo_img );
-								}
+					
+								$th->writeImage($archivo."_th.".$extencion_img);
 								
 							}						
 						}	
@@ -210,7 +192,7 @@
 				//$logo->rotateimage(new ImagickPixel(), 90);
 			}
 
-			if($orientation=="")
+			if(@$orientation=="")
 			{
 				if($height>$width)	$orientation 	= "vertical";
 				else				$orientation 	= "horizontal";

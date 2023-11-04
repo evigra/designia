@@ -58,8 +58,7 @@ body{
 {
 	float:				left; 
 	color:				black; 
-	border-radius: 		10px; 
-	margin:				5px; 
+	border-radius: 		10px 10px; 
 	border-color: 		#bbb;
 	border-style: 		solid;
 	background-color:	var(--fondo_color3);
@@ -72,7 +71,7 @@ body{
 }
 .fotos2
 {
-	width:				calc((var(--ancho_contenido)/2) * 0.90); 
+	width:				calc((var(--ancho_contenido)/2) * 0.92); 
 	height:				calc((var(--ancho_contenido)/2) * 0.66 ); 
 }
 #galeria_fotos

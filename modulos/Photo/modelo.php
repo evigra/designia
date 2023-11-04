@@ -55,42 +55,32 @@
 					if($_REQUEST["file"]==$md5_file)
 					{
 						$archivo 	=$path . "file_$md5_file.";
-
-						$photo	="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
+						//$photo		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
 
 						if(in_array($file["extension"], $files_image))
-						{
 							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
-						}
 						if(in_array($file["extension"], $files_video))
-						{
 							$photo="
 								<video style=\"max-height:600px; max-width:800px; width:100%;\" autoplay controls>
 									<source src=\"$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
 								</video> 
 							";
-						}
 					}		
-					
+
 					$archivo 	=$path . "file_$md5_file";
 					
-
 					if(in_array($file["extension"], $files_image))
-					{
 						$archivo	="<img src=\"$archivo"."_th.{$file["extension"]}\">";	
-					}
 					if(in_array($file["extension"], $files_video))
-					{
 						$archivo	="<img src=\"$archivo"."_th.jpg\">";	
-
-					}
 
 					$words_perfil				=$this->__PERFIL_DATA($file);
 
 					$title="";
 					if($file["title"]!="")		
 					{
+						
 						$title					="<h4>{$file["title"]}</h4>";
 		
 						$title_url				=str_replace(" ", "_", $file["title"]);   
@@ -101,8 +91,6 @@
 					else	$title_url			="Evento";
 		
 					$words_template=array(
-						#"events_title"			=>$file["title"],
-						#"events_description"	=>$file["description"],
 						"evento" 				=>$_REQUEST["event"],
 						"index"					=>$id,
 						"events_title"			=>$title,
