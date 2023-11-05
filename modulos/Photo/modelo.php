@@ -123,6 +123,12 @@
 					$this->words["html_head_image"]			=$_SERVER["SERVER_NAME"] ."/". $archivo_face;
 					$this->words["html_head_url"]			=$_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
+					$this->words["events_pie"]			="
+						<div class=\"fb-share-button\" data-href=\"http://www.designia.vip\" data-layout=\"\" data-size=\"\">
+							<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u={$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
+						/div>					
+					";
+					
 					
 
 					

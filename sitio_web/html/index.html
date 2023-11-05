@@ -15,7 +15,8 @@
         <meta property="og:type"          content="website" />
         <meta property="og:type"          content="{html_head_type}" />
         -->
-        
+
+        {html_head_type}
         
         
         <meta property="og:title"         content="{html_head_title}" />
@@ -29,6 +30,9 @@
         -->
     </head>
     <body>
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0&appId=1984430411957885" nonce="tSCA6npV"></script>        
+
       <form action="" method="POST" enctype="multipart/form-data">	
         {html_body}  
       </form>
