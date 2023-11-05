@@ -66,7 +66,7 @@
 							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 						if(in_array($file["extension"], $files_video))
 							$photo="
-								<video style=\"max-height:600px; max-width:800px; width:100%;\" autoplay=\"autoplay\" controls>
+								<video id=\"video\" style=\"max-height:600px; max-width:800px; width:100%;\" controls>
 									<source src=\"$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
 								</video> 

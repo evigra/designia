@@ -51,7 +51,9 @@ body{
 	color:				#666; 
 	box-shadow: 		0 0 20px black; 
 	border-radius: 		10px; 
+	
 	background-color:	var(--fondo_color2);
+	
 }
 
 .fotos
@@ -59,9 +61,9 @@ body{
 	float:				left; 
 	color:				black; 
 	border-radius: 		10px 10px; 
-	border-color: 		#bbb;
-	border-style: 		solid;
+	/*
 	background-color:	var(--fondo_color3);
+	*/
 }
 
 .fotos1
@@ -74,6 +76,23 @@ body{
 	width:				calc((var(--ancho_contenido)/2) * 0.92); 
 	height:				calc((var(--ancho_contenido)/2) * 0.66 ); 
 }
+
+
+
+div > a > img.video + div {
+	height:inherit;
+	width:inherit;
+	display:block;
+	margin: auto;
+	background-color: black;
+}
+
+div > a > img + div {
+	display:			none;
+}
+
+
+
 #galeria_fotos
 {
 	float:				left; 

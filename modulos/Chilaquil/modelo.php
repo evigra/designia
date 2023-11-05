@@ -85,7 +85,7 @@
 					if(in_array($file["extension"], $files_image))
 						$words_event["archivo".$rows]		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 					if(in_array($file["extension"], $files_video))
-						$words_event["archivo".$rows]		="<img src=\"$archivo"."jpg\" width=\"100%\">";						
+						$words_event["archivo".$rows]		="<img class=\"video\" src=\"$archivo"."jpg\" width=\"100%\">";						
 					$rows++;
 				}
 
