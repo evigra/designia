@@ -63,20 +63,29 @@
 						//$photo		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
 
 						if(in_array($file["extension"], $files_image))
+						{
 							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
+							$this->words["html_head_type"]			="<meta property=\"og:image\" content=\"http://$archivo{$file["extension"]}\" />";
+						}
+
+							
 						if(in_array($file["extension"], $files_video))
+						{
 							$photo="
 								<video id=\"video\" style=\"max-height:600px; max-width:800px; width:100%;\" controls>
 									<source src=\"$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
 								</video> 
 							";
+							$this->words["html_head_type"]			="<meta property=\"og:video\" content=\"http://$archivo"."webm\" />";
+						}						
 					}		
 
 					$archivo 	=$path . "file_$md5_file";
 					
 					if(in_array($file["extension"], $files_image))
 					{
+						
 						$archivo_face	="$archivo".".{$file["extension"]}";	
 						$archivo		="$archivo"."_th.{$file["extension"]}";	
 						
