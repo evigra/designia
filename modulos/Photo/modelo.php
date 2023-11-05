@@ -23,6 +23,11 @@
 				"events_description"	=>"Aqui apareceria la descipcion del evento",
 				"events_photos"			=>"ESTAS INGREADO UNA URL QUE NO EXISTE",
 			);
+
+			
+
+			
+
 			$return	=$this->__VIEW_BASE("galeria", $words_event);
 			$user_ids		="";
 			$usuarios		=array();
@@ -47,21 +52,21 @@
 				$return	="";	
 				foreach($files as $id =>$file)
 				{
-					$path="../../modulos/files/file/";
+					$path="modulos/files/file/";
 					$md5_file=md5($file["file_id"]);
 
 					$archivo 	="";
 
 					if($_REQUEST["file"]==$md5_file)
 					{
-						$archivo 	=$path . "file_$md5_file.";
+						$archivo 	="../../" . $path . "file_$md5_file.";
 						//$photo		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
 
 						if(in_array($file["extension"], $files_image))
 							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
 						if(in_array($file["extension"], $files_video))
 							$photo="
-								<video style=\"max-height:600px; max-width:800px; width:100%;\" autoplay controls>
+								<video style=\"max-height:600px; max-width:800px; width:100%;\" autoplay=\"autoplay\" controls>
 									<source src=\"$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
 								</video> 
@@ -71,9 +76,11 @@
 					$archivo 	=$path . "file_$md5_file";
 					
 					if(in_array($file["extension"], $files_image))
-						$archivo	="<img src=\"$archivo"."_th.{$file["extension"]}\">";	
+						$archivo	="$archivo"."_th.{$file["extension"]}";	
 					if(in_array($file["extension"], $files_video))
-						$archivo	="<img src=\"$archivo"."_th.jpg\">";	
+						$archivo	="$archivo"."_th.jpg";	
+
+					$archivo_html="<img src=\"../../$archivo\">"; 
 
 					$words_perfil				=$this->__PERFIL_DATA($file);
 
@@ -89,6 +96,15 @@
 						$title_url				=str_replace("/", "_", $title_url);					
 					}
 					else	$title_url			="Evento";
+
+					$this->words["html_head_title"]			=$file["title"];
+					$this->words["html_head_description"]	=$file["description"];
+					$this->words["html_head_image"]			=$_SERVER["SERVER_NAME"] . $archivo . ".jpg";
+					$this->words["html_head_url"]			=$_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+
+					
+
+					
 		
 					$words_template=array(
 						"evento" 				=>$_REQUEST["event"],
@@ -100,7 +116,7 @@
 					$return		.=$this->__VIEW_MODULE("fotos", $words_template);
 					
 					$words_file=array(						
-						"foto$id" => $archivo,
+						"foto$id" => $archivo_html,
 						"file$id" => $md5_file
 					);
 					$return		=$this->__REPLACE($return,$words_file);
