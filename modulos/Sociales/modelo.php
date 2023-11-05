@@ -1,5 +1,5 @@
 <?php
-	class chilaquil extends general
+	class sociales extends general
 	{   
 		##############################################################################	
 		##  Propiedades	
