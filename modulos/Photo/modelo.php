@@ -76,9 +76,21 @@
 					$archivo 	=$path . "file_$md5_file";
 					
 					if(in_array($file["extension"], $files_image))
-						$archivo	="$archivo"."_th.{$file["extension"]}";	
+					{
+						$archivo_face	="$archivo".".{$file["extension"]}";	
+						$archivo		="$archivo"."_th.{$file["extension"]}";	
+						
+
+					}
+						
 					if(in_array($file["extension"], $files_video))
+					{
+						$archivo_face	="$archivo".".jpg";		
 						$archivo	="$archivo"."_th.jpg";	
+						
+
+					}
+						
 
 					$archivo_html="<img src=\"../../$archivo\">"; 
 
@@ -99,7 +111,7 @@
 
 					$this->words["html_head_title"]			=$file["title"];
 					$this->words["html_head_description"]	=$file["description"];
-					$this->words["html_head_image"]			=$_SERVER["SERVER_NAME"] . $archivo . ".jpg";
+					$this->words["html_head_image"]			=$_SERVER["SERVER_NAME"] ."/". $archivo_face;
 					$this->words["html_head_url"]			=$_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
 					
