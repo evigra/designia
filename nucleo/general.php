@@ -183,8 +183,8 @@
 			$return.="<a href=\"https://www.facebook.com/dialog/share?
 			app_id=1984430411957885
 			&display=popup
-			&href=$url"."&type=custom_url&app_absent=0\">
-				<img width=\"50\" src=\"../../sitio_web/img/facebook.svg\">";
+			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
 
 			$return.="<a href=\"https://wa.me/?text=$url"."&type=custom_url&app_absent=0\">
