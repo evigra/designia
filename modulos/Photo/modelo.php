@@ -147,7 +147,7 @@
 					"events_photos"			=>$return,
 					"events_pie"			=>"
 					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://{$this->words["html_head_url"]}\" data-layout=\"\" data-size=\"\">
-					<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u={$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
+					<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u=http://{$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
 				/div>					
 					",
 				);
