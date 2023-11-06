@@ -59,13 +59,13 @@
 
 					if($_REQUEST["file"]==$md5_file)
 					{
-						$archivo 	="../../" . $path . "file_$md5_file.";
-						//$photo		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";
+						$archivo 	=$path . "file_$md5_file.";
 
 						if(in_array($file["extension"], $files_image))
 						{
-							$photo="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
-							$this->words["html_head_type"]			="<meta property=\"og:image\" content=\"http://$archivo{$file["extension"]}\" />";
+							$photo="<img src=\"../../$archivo{$file["extension"]}\" width=\"100%\">";							
+							$this->words["html_head_type"]		
+								="<meta property=\"og:image\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo{$file["extension"]}\" />";
 						}
 
 							
@@ -73,11 +73,12 @@
 						{
 							$photo="
 								<video id=\"video\" style=\"max-height:600px; max-width:800px; width:100%;\" controls>
-									<source src=\"$archivo"."webm\" type=\"video/webm\">
+									<source src=\"../../$archivo"."webm\" type=\"video/webm\">
 									Your browser does not support the video tag.
 								</video> 
 							";
-							$this->words["html_head_type"]			="<meta property=\"og:video\" content=\"http://$archivo"."webm\" />";
+							$this->words["html_head_type"]		
+								="<meta property=\"og:video\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."webm\" />";
 						}						
 					}		
 
@@ -88,27 +89,20 @@
 						
 						$archivo_face	="$archivo".".{$file["extension"]}";	
 						$archivo		="$archivo"."_th.{$file["extension"]}";	
-						
-
 					}
 						
 					if(in_array($file["extension"], $files_video))
 					{
-						$archivo_face	="$archivo".".jpg";		
+						$archivo_face	="$archivo".".webm";		
 						$archivo	="$archivo"."_th.jpg";	
-						
-
 					}
 						
-
-					$archivo_html="<img src=\"../../$archivo\">"; 
-
+					$archivo_html				="<img src=\"../../$archivo\">"; 
 					$words_perfil				=$this->__PERFIL_DATA($file);
 
 					$title="";
 					if($file["title"]!="")		
 					{
-						
 						$title					="<h4>{$file["title"]}</h4>";
 		
 						$title_url				=str_replace(" ", "_", $file["title"]);   
@@ -121,6 +115,7 @@
 					$this->words["html_head_title"]			=$file["title"];
 					$this->words["html_head_description"]	=$file["description"];
 					$this->words["html_head_image"]			=$_SERVER["SERVER_NAME"] ."/". $archivo_face;
+					$this->words["html_head_video"]			=$_SERVER["SERVER_NAME"] ."/". $archivo_face;
 					$this->words["html_head_url"]			=$_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
 					
@@ -151,7 +146,7 @@
 					"events_photo"			=>$photo,	
 					"events_photos"			=>$return,
 					"events_pie"			=>"
-					<div style=\"height:50px; width:150px;\" class=\"fb-share-button\" data-href=\"http://www.designia.vip\" data-layout=\"\" data-size=\"\">
+					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://www.designia.vip\" data-layout=\"\" data-size=\"\">
 					<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u={$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
 				/div>					
 					",
