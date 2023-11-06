@@ -118,11 +118,6 @@
 					$this->words["html_head_video"]			=$_SERVER["SERVER_NAME"] ."/". $archivo_face;
 					$this->words["html_head_url"]			=$_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
-					
-					
-
-					
-		
 					$words_template=array(
 						"evento" 				=>$_REQUEST["event"],
 						"index"					=>$id,
@@ -145,11 +140,7 @@
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photo"			=>$photo,	
 					"events_photos"			=>$return,
-					"events_pie"			=>"
-					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://{$this->words["html_head_url"]}\" data-layout=\"\" data-size=\"\">
-					<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u=http://{$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
-				/div>					
-					",
+					"events_pie"			=>$this->__SOCIAL_NETWORKS($this->words["html_head_url"]),
 				);
 
 				$return	=$this->__VIEW_BASE("galeria", $words_event);
