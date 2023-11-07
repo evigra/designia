@@ -143,7 +143,7 @@
 					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
 					"events_photo"			=>$photo,	
 					"events_photos"			=>$return,
-					"events_pie"			=>$this->__SOCIAL_NETWORKS($this->words["html_head_url"]),
+					"events_pie"			=>$this->__SOCIAL_NETWORKS($this->words["html_head_url"], $_REQUEST["file"]),
 				);
 
 				$return	=$this->__VIEW_BASE("galeria", $words_event);

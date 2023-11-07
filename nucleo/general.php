@@ -154,7 +154,7 @@
 
 		}		
 
-		public function __SOCIAL_NETWORKS($url)
+		public function __SOCIAL_NETWORKS($url, $file_id)
     	{    	
 			$return="";
 /*
@@ -182,7 +182,7 @@
 			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
-			$return.="<a href=\"https://wa.me/?text=$url"."&type=custom_url&app_absent=0\">
+			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url"."&type=custom_url&app_absent=0\">
 				<img width=\"50\" src=\"../../sitio_web/img/WhatsApp.png\">";
 			
 			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\">
@@ -191,6 +191,13 @@
 			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\">
 				<img width=\"40\" src=\"../../sitio_web/img/reddit.png\">";
 
+
+
+			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\">
+			<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
+
+				
+					
 			return $return; 
 		}
 

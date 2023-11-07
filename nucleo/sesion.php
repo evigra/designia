@@ -39,7 +39,7 @@
 
 	if(isset($_COOKIE["designia"]))
 	{
-		setcookie("designia", $_COOKIE["designia"], time()+ (60 * 60 * 24 *7), "/", $_REQUEST["server"]);
+		setcookie("designia", $_COOKIE["designia"], time()+ (60 * 60 * 24 *31), "/", $_REQUEST["server"]);
 
 		if(!isset($_SESSION))
 		{
@@ -57,8 +57,6 @@
 			$objeto			=new sesion();
 			$objeto->__COOKIE();			
 		}
-
-	
 	}
 
 	

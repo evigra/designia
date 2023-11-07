@@ -83,7 +83,19 @@
             $("div.developer").dialog({width:700});
           }	    
           
-            
+          if($("a.acortador").length>0)
+          {
+            $("a.acortador").click(function(){
+
+              var path=$(this).attr("title");
+              navigator.clipboard.writeText(path);
+
+            });
+
+          }	    
+
+          
+          
 
           $("div.cargar ").on( "click", function() {            
             tinymce.init({
