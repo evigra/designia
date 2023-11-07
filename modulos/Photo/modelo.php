@@ -24,9 +24,6 @@
 				"events_photos"			=>"ESTAS INGREADO UNA URL QUE NO EXISTE",
 			);
 
-			
-
-			
 
 			$return	=$this->__VIEW_BASE("galeria", $words_event);
 			$user_ids		="";
@@ -42,8 +39,6 @@
 					user u ON e.user_id=u.id 
 				WHERE
 					MD5(e.id)='$_REQUEST[event]' 
-					#AND MD5(f.id)='$_REQUEST[file]'
-
 			";
 			$files=$this->__EXECUTE($comando_sql);
 			
@@ -67,7 +62,6 @@
 							$this->words["html_head_type"]		
 								="<meta property=\"og:image\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo{$file["extension"]}\" />";
 						}
-
 							
 						if(in_array($file["extension"], $files_video))
 						{
@@ -77,11 +71,10 @@
 									Your browser does not support the video tag.
 								</video> 
 							";
-							$this->words["html_head_type"]		
-								="
+							$this->words["html_head_type"]="
 								<meta property=\"og:video\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."webm\" />
 								<meta property=\"og:image\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."jpg\" />
-								";
+							";
 						}						
 					}		
 
@@ -89,11 +82,9 @@
 					
 					if(in_array($file["extension"], $files_image))
 					{
-						
 						$archivo_face	="$archivo".".{$file["extension"]}";	
 						$archivo		="$archivo"."_th.{$file["extension"]}";	
-					}
-						
+					}	
 					if(in_array($file["extension"], $files_video))
 					{
 						$archivo_face	="$archivo".".webm";		

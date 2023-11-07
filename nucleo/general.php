@@ -171,6 +171,8 @@
 	https://l.facebook.com/l.php?u=https%3A%2F%2Fwa.me%2F%3Ftext%3Dhttps%253A%252F%252Fwww.facebook.com%252FLEBRAYAN%252Fposts%252Fpfbid03f8L2jiWnng22gwrkmFccKPaqzYZ9jQf6p6r2CpTnFc6JEg92eM6qoCQLPYeUZEyl%253Fmibextid%253DbKks23%26fbclid%3DIwAR0VJ-Ba8pwwOMw3P-URxkxdkTHBRuWV2BcKWeB5XLk0wnzCGF58HXw7ru8&h=AT2QVyMXG13krpus2qKbsavXI59QYbG6kj05XrR9fwx_13Hz15lt68lPux678xtT59yssrxC7iLfW3Z4TV7Lsnvcy9ue6sFSoVk229z9v8qtyZRYlkI-471HVhwRU8WwEYcFigG2MV0BMg&__tn__=J]-R&c[0]=AT3fi1NU7v_dksXme7pN5fE4QZQ9AlHT-ydLLa0Outpt_aCBLA9BmTvbjoGwGsD-aeXpQVWAhXKzrmBRaqrsGWm3tArpoupuflgu9yR4wSngqt22IJmUM3ksbOtT9HX05oLNJAdUz97MTnhZQ5H346bPcUQCAdKml-Cp3BaJ1sSu1q9CIc7O6WzFB5PhaA2VXej9A7TziXU
 	https://wa.me/?text=https%3A%2F%2Fwww.facebook.com%2FLEBRAYAN%2Fposts%2Fpfbid03f8L2jiWnng22gwrkmFccKPaqzYZ9jQf6p6r2CpTnFc6JEg92eM6qoCQLPYeUZEyl%3Fmibextid%3DbKks23&type=custom_url&app_absent=0		
 
+	https://twitter.com/intent/tweet?url=https%3A//youtu.be/LeYsRMZFUq0%3Fsi%3De2Mb9Lb4e7cMgFKw&text=Les%20Doy%20%241%2C000%2C000%20con%20Solo%201%20Minuto%20para%20Gastarlo&via=YouTube&related=YouTube,YouTubeTrends,YTCreators
+
 	https://www.facebook.com/dialog/share?
   app_id=145634995501895
   &display=popup
@@ -185,21 +187,20 @@
 			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
+			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\">
+				<img width=\"40\" src=\"../../sitio_web/img/twiter.jpg\">";
+
 			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\">
-				<img width=\"50\" src=\"../../sitio_web/img/WhatsApp.png\">";
-			
+				<img width=\"45\" src=\"../../sitio_web/img/WhatsApp.png\">";		
+
 			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\">
 				<img width=\"40\" src=\"../../sitio_web/img/pinterest.png\">";
 
 			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\">
 				<img width=\"40\" src=\"../../sitio_web/img/reddit.png\">";
 
-
-
 			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\">
-			<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
-
-				
+				<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
 					
 			return $return; 
 		}
