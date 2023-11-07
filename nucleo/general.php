@@ -156,9 +156,10 @@
 
 		public function __SOCIAL_NETWORKS($url, $file_id)
     	{    	
+
 			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
 			
-
+			$this->__PRINT_R($url);
 			
 			$return="";
 /*
@@ -186,7 +187,7 @@
 			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
-			$return.="<a href=\"https://api.whatsapp.com/send/?text=http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\">
+			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\">
 				<img width=\"50\" src=\"../../sitio_web/img/WhatsApp.png\">";
 			
 			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\">
