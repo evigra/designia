@@ -156,6 +156,10 @@
 
 		public function __SOCIAL_NETWORKS($url, $file_id)
     	{    	
+			$url=urlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
+			
+
+			
 			$return="";
 /*
 					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://{$this->words["html_head_url"]}\" data-layout=\"\" data-size=\"\">
