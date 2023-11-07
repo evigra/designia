@@ -156,7 +156,7 @@
 
 		public function __SOCIAL_NETWORKS($url, $file_id)
     	{    	
-			$url=urlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
+			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
 			
 
 			
