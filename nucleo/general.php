@@ -158,9 +158,7 @@
     	{    	
 
 			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
-			
-			$this->__PRINT_R($url);
-			
+						
 			$return="";
 /*
 					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://{$this->words["html_head_url"]}\" data-layout=\"\" data-size=\"\">
