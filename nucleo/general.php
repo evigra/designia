@@ -187,19 +187,19 @@
 			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
-			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\">
+			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/twiter.jpg\">";
 
-			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\">
+			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\" target=\"_blank\">
 				<img width=\"45\" src=\"../../sitio_web/img/WhatsApp.png\">";		
 
-			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\">
+			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/pinterest.png\">";
 
-			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\">
+			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/reddit.png\">";
 
-			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\">
+			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\"  target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
 					
 			return $return; 
