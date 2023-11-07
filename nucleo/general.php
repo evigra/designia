@@ -156,7 +156,7 @@
 
 		public function __SOCIAL_NETWORKS($url, $file_id)
     	{    	
-
+			$aux=rawurlencode($url);
 			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
 						
 			$return="";
@@ -184,7 +184,7 @@
 			$return.="<a href=\"https://www.facebook.com/dialog/share?
 			app_id=1984430411957885
 			&display=popup
-			&href=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
+			&href=$aux"."&type=custom_url&app_absent=0\" target=\"_blank\">
 				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
 
 			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\" target=\"_blank\">
