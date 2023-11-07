@@ -78,7 +78,10 @@
 								</video> 
 							";
 							$this->words["html_head_type"]		
-								="<meta property=\"og:video\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."webm\" />";
+								="
+								<meta property=\"og:video\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."webm\" />
+								<meta property=\"og:image\" content=\"http://{$_SERVER["SERVER_NAME"]}/$archivo"."jpg\" />
+								";
 						}						
 					}		
 
