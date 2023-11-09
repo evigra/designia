@@ -1,6 +1,8 @@
 <?php
 	$objeto			=new event();
 
+	#$objeto->__PRINT_R($objeto->words,2);
+
 	$objeto->words["html_head_css"]			="default";
 	$objeto->words["html_head_title"]		.="Galeria";
 	

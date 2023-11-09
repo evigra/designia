@@ -9,7 +9,6 @@
 	$path_index="modulos/" . $_REQUEST["class"] . "/index.php";
 	$path_model="modulos/" . $_REQUEST["class"] . "/modelo.php";
 
-
 	if(isset($_REQUEST["abrev"]))
 	{
 		$objeto			=new general();

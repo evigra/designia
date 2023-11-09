@@ -3,7 +3,6 @@
 
 	$objeto										=new files();
 	$objeto->__SESSION();
-	#$objeto->__PRINT_R($objeto);
 	
 	
 

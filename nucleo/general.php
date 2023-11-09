@@ -5,13 +5,22 @@
 		##  Metodos	
 		##############################################################################		
 		public function __CONSTRUCT()
-		{		
-			$files_available				=array("image/png","image/jpeg", "video/mp4");
+		{	
+			#$this->__PRINT_R($objeto->words,1);
+			#$this->words["html_create"]					="";	
+			#$this->words["html_cargar_title"]				="";
+			#$this->words["html_cargar_description"]		="";
 
-			$this->words["server"]			=$_REQUEST["server"];
-			$this->words["user"]			=$_REQUEST["user"];
-			$this->words["path"]			=$_REQUEST["path"];
-			$this->__FILES_DATA				=array();	
+			$files_available							=array("image/png","image/jpeg", "video/mp4");
+
+
+			$this->words["server"]						=$_REQUEST["server"];
+			$this->words["user"]						=$_REQUEST["user"];
+			$this->words["path"]						=$_REQUEST["path"];
+			
+			$this->words["events_opciones"]				="";
+
+			$this->__FILES_DATA							=array();	
 			
 			if(isset($_SESSION["user"]))
 			{
@@ -41,18 +50,35 @@
 
 			if(isset($_FILES["files"]))
 			{	
+				if(isset($_REQUEST["event"]))
+				{
+					$comando_sql	="
+						SELECT *, 
+							e.id as event_id,
+							f.id as file_id
+						FROM 
+							events e JOIN 
+							files f ON e.id=f.event_id JOIN
+							user u ON e.user_id=u.id 
+						WHERE
+							MD5(e.id)='{$_REQUEST["event"]}' 
+					";					
+				}
+				else
+				{
+					$comando_sql	="INSERT INTO events (user_id, type, datetime_show, datetime, title, description)
+						VALUES( 
+							'1', 
+							'" . $_REQUEST["class"]. "',
+							'" . date("Y-m-d H:i:s") . "',
+							'" . date("Y-m-d H:i:s"). "',
+							'" . $_REQUEST["title"]. "',
+							'" . $_REQUEST["description"]. "'
+						)
+					";
+				}
+
 				
-				$comando_sql	="INSERT INTO events (user_id, type, datetime_show, datetime, title, description)
-					VALUES( 
-						'1', 
-						'" . $_REQUEST["class"]. "',
-						'" . date("Y-m-d H:i:s") . "',
-						'" . date("Y-m-d H:i:s"). "',
-						'" . $_REQUEST["title"]. "',
-						'" . $_REQUEST["description"]. "'
-					)
-				";
-									
 				foreach($_FILES["files"] as $field => $values)
 				{		        
 					foreach($values as $row => $data) 
@@ -65,9 +91,14 @@
 							if($field=="name")
 							{
 								$path="modulos/files/file/";
-
-								if(!isset($events_id)) $events_id			=$this->__EXECUTE($comando_sql);
-
+								
+								if(!isset($events_id)) 
+								{
+									$events_id			=$this->__EXECUTE($comando_sql);
+									if(isset($_REQUEST["event"]))
+										$events_id=$events_id[0]["event_id"];
+								}
+								
 								$newHeight 		= 0;
 								$newWidth 		= 0;
 								$orientation 	= "";
@@ -133,7 +164,6 @@
 								$width 			= $redimencion[1];								
 								$th->resizeImage($width,$height, imagick::FILTER_LANCZOS, 0.8, true);					
 
-					
 								$th->writeImage($archivo."_th.".$extencion_img);
 								
 							}						
@@ -160,26 +190,6 @@
 			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
 						
 			$return="";
-/*
-					<div style=\"height:50px; width:150px; font-size:30px;\" class=\"fb-share-button\" data-href=\"http://{$this->words["html_head_url"]}\" data-layout=\"\" data-size=\"\">
-					<a target=\"_blank\" href=\"https://www.facebook.com/sharer/sharer.php?u=http://{$this->words["html_head_url"]}%2F&amp;src=sdkpreparse\" class=\"fb-xfbml-parse-ignore\">Compartir</a><
-				/div>
-	https://www.pinterest.com/pin/create/button/?url=https%3A//youtube.com/watch%3Fv%3DKrLj6nc516A%26si%3DPZ3DGebdG9ZHwI6T&description=Auto%20de%20%241%20Vs%20Auto%20de%20%24100%2C000%2C000&is_video=true&media=https%3A//i.ytimg.com/vi/KrLj6nc516A/maxresdefault.jpg
-	https://www.reddit.com/submit?url=https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3DKrLj6nc516A%26si%3DPZ3DGebdG9ZHwI6T&title=Auto%20de%20%241%20Vs%20Auto%20de%20%24100%2C000%2C000
-
-	https://api.whatsapp.com/send/?text=https%3A%2F%2Fwww.facebook.com%2FLEBRAYAN%2Fposts%2Fpfbid03f8L2jiWnng22gwrkmFccKPaqzYZ9jQf6p6r2CpTnFc6JEg92eM6qoCQLPYeUZEyl%3Fmibextid%3DbKks23&type=custom_url&app_absent=0		
-	https://l.facebook.com/l.php?u=https%3A%2F%2Fwa.me%2F%3Ftext%3Dhttps%253A%252F%252Fwww.facebook.com%252FLEBRAYAN%252Fposts%252Fpfbid03f8L2jiWnng22gwrkmFccKPaqzYZ9jQf6p6r2CpTnFc6JEg92eM6qoCQLPYeUZEyl%253Fmibextid%253DbKks23%26fbclid%3DIwAR0VJ-Ba8pwwOMw3P-URxkxdkTHBRuWV2BcKWeB5XLk0wnzCGF58HXw7ru8&h=AT2QVyMXG13krpus2qKbsavXI59QYbG6kj05XrR9fwx_13Hz15lt68lPux678xtT59yssrxC7iLfW3Z4TV7Lsnvcy9ue6sFSoVk229z9v8qtyZRYlkI-471HVhwRU8WwEYcFigG2MV0BMg&__tn__=J]-R&c[0]=AT3fi1NU7v_dksXme7pN5fE4QZQ9AlHT-ydLLa0Outpt_aCBLA9BmTvbjoGwGsD-aeXpQVWAhXKzrmBRaqrsGWm3tArpoupuflgu9yR4wSngqt22IJmUM3ksbOtT9HX05oLNJAdUz97MTnhZQ5H346bPcUQCAdKml-Cp3BaJ1sSu1q9CIc7O6WzFB5PhaA2VXej9A7TziXU
-	https://wa.me/?text=https%3A%2F%2Fwww.facebook.com%2FLEBRAYAN%2Fposts%2Fpfbid03f8L2jiWnng22gwrkmFccKPaqzYZ9jQf6p6r2CpTnFc6JEg92eM6qoCQLPYeUZEyl%3Fmibextid%3DbKks23&type=custom_url&app_absent=0		
-
-	https://twitter.com/intent/tweet?url=https%3A//youtu.be/LeYsRMZFUq0%3Fsi%3De2Mb9Lb4e7cMgFKw&text=Les%20Doy%20%241%2C000%2C000%20con%20Solo%201%20Minuto%20para%20Gastarlo&via=YouTube&related=YouTube,YouTubeTrends,YTCreators
-
-	https://www.facebook.com/dialog/share?
-  app_id=145634995501895
-  &display=popup
-  &href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F
-  &redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer
-	*/
-
 
 			$return.="<a href=\"https://www.facebook.com/dialog/share?
 			app_id=1984430411957885
@@ -278,6 +288,8 @@
 		##############################################################################		 		
 		public function __BROWSE()
     	{    	
+			#$this->words["html_cargar_title"]			="";
+			#$this->words["html_cargar_description"]	="";
     	}		
 		##############################################################################		 		
 		public function __SAVE()

@@ -15,6 +15,10 @@
 		}
 		public function __BROWSE()
     	{
+			$this->words["html_cargar_title"]		="";
+			$this->words["html_cargar_description"]	="";
+
+
 			$files_image				=array("png","jpeg","jpg");
 			$files_video				=array("mp4");
 

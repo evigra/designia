@@ -66,8 +66,6 @@
 					$return		=$this->__REPLACE($return,$words_file);
 				}
 
-				#$this->__PRINT_R($return);
-
 				$words_event=array(
 					"events_title"			=>$row["title"],
 					"events_description"	=>$row["description"],

@@ -6,6 +6,8 @@
 	
 	$objeto->words["html_head_description"]	="Esta seccion es un clilaquil de designios";
 	$objeto->words["html_head_keywords"]	="Designia, Designia.vip, Eventos, events";
+
+	#$objeto->__PRINT_R($objeto->words, 1);
 	
 	$objeto->words["html_body"]				=$objeto->__VIEW_BASE("body", $objeto->words);
 
