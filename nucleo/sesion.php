@@ -52,15 +52,12 @@
 		if(!isset($_SESSION["user"]))
 		{
 
-			$path_model="modulos/Sesion/modelo.php";		
+			$path_model="modelo/sesion.php";		
 			require_once($path_model);			
 			$objeto			=new sesion();
 			$objeto->__COOKIE();			
 		}
 	}
-
-	
-
 
 	if(@$_GET["sys_action"]=="cerrar_sesion")
 	{

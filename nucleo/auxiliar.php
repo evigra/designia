@@ -86,7 +86,90 @@
 
 			return $return;
 		} 
+		public function __SOCIAL_NETWORKS($url, $file_id)
+    	{    	
+			$aux=rawurlencode($url);
+			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
+						
+			$return="";
 
+			$return.="<a href=\"https://www.facebook.com/dialog/share?
+			app_id=1984430411957885
+			&display=popup
+			&href=$aux"."&type=custom_url&app_absent=0\" target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
+
+			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\" target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/twiter.jpg\">";
+
+			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\" target=\"_blank\">
+				<img width=\"45\" src=\"../../sitio_web/img/WhatsApp.png\">";		
+
+			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/pinterest.png\">";
+
+			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/reddit.png\">";
+
+			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\"  target=\"_blank\">
+				<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
+					
+			return $return; 
+		}
+		public function __REDIMENSION($maximo, $width, $height)
+    	{    	
+			if($width > $maximo)
+			{
+				$aux	=$width;
+				$width	=$maximo;
+				$height	=($maximo * $height) / $aux;  		
+			}			
+			if($height>$maximo)
+			{
+				$aux	=$height;
+				$height	=$maximo;
+				$width	=($maximo * $width) / $aux;  		
+			}
+			return array(round($height), round($width));
+		}		
+		public function __FILES_COPI()
+    	{    	
+			foreach($this->__FILES_DATA as $row=>$file)
+			{
+				$vtype			=explode("/", $file["type"]);
+				$type			=$vtype[0];				
+			}
+		}		
+		public function __MENU_SESSION()
+    	{    	
+			if(isset($_SESSION["user"]))
+			{
+				$this->words["html_sesion_first_name"]	=$_SESSION["user"]["first_name"];	
+				$this->words["html_create"]				=$this->__VIEW_BASE("cargar", $this->words);				
+				
+				$this->words["html_sesion"]				="
+					<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/personas.png\" ></div>
+					<div class=\"menu_texto\" style=\"color:#fff;\" >{$_SESSION["user"]["name"]}</div>
+					
+					<div class=\"menu_separador\"></div>
+					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/salida.png\" ></div>
+						<div class=\"menu_texto\"  >Cerrar</div>
+					</a>
+				";
+			}
+			else
+			{
+				$this->words["html_sesion"]		="
+					<a href=\"../../Sesion/Create/\" style=\"color:#fff;\"> 						
+						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/entrada.png\" ></div>
+						<div class=\"menu_texto\" >Login</div>
+					</a>
+				";
+			}
+		}
 		
+
+
 	}  	
 ?>

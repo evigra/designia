@@ -6,8 +6,8 @@
 
 	require_once("nucleo/sesion.php");	
 
-	$path_index="modulos/" . $_REQUEST["class"] . "/index.php";
-	$path_model="modulos/" . $_REQUEST["class"] . "/modelo.php";
+	$path_controlador="controlador/" . $_REQUEST["class"] . ".php";
+	$path_modelo="modelo/" . $_REQUEST["class"] . ".php";
 
 	if(isset($_REQUEST["abrev"]))
 	{
@@ -37,14 +37,12 @@
 		$path="http://" . $_SERVER["SERVER_NAME"] . "/Photo/$title_url/&event=" . MD5($file["event_id"]) . "&file=" . MD5($file["file_id"]) ;
 		Header ("Location: $path");			
 	}
-	else if(@file_exists($path_index))		
+	else if(@file_exists($path_controlador))		
 	{	    	
-		require_once($path_model);			
-		require_once($path_index);			
-	}
-	
+		if(@file_exists($path_modelo))			require_once($path_modelo);			
+		require_once($path_controlador);			
+	}	
 	else
-
 		echo "ERROR: La pagina que ingresaste no existe";	
 
 		

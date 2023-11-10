@@ -6,11 +6,6 @@
 		##############################################################################		
 		public function __CONSTRUCT()
 		{	
-			#$this->__PRINT_R($objeto->words,1);
-			#$this->words["html_create"]					="";	
-			#$this->words["html_cargar_title"]				="";
-			#$this->words["html_cargar_description"]		="";
-
 			$files_available							=array("image/png","image/jpeg", "video/mp4");
 
 
@@ -22,32 +17,7 @@
 
 			$this->__FILES_DATA							=array();	
 			
-			if(isset($_SESSION["user"]))
-			{
-				$this->words["html_sesion_first_name"]	=$_SESSION["user"]["first_name"];	
-				$this->words["html_create"]				=$this->__VIEW_BASE("cargar", $this->words);				
-				
-				$this->words["html_sesion"]				="
-					<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/personas.png\" ></div>
-					<div class=\"menu_texto\" style=\"color:#fff;\" >{$_SESSION["user"]["name"]}</div>
-					
-					<div class=\"menu_separador\"></div>
-					<a href=\"&sys_action=cerrar_sesion\" style=\"color:#fff;\"> 
-						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/salida.png\" ></div>
-						<div class=\"menu_texto\"  >Cerrar</div>
-					</a>
-				";
-			}
-			else
-			{
-				$this->words["html_sesion"]		="
-					<a href=\"../../Sesion/Create/\" style=\"color:#fff;\"> 						
-						<div class=\"menu_imagen\" ><img class=\"menu_imagen\" src=\"../../sitio_web/img/entrada.png\" ></div>
-						<div class=\"menu_texto\" >Login</div>
-					</a>
-				";
-			}
-
+			$this->__MENU_SESSION();
 			if(isset($_FILES["files"]))
 			{	
 				if(isset($_REQUEST["event"]))
@@ -90,7 +60,7 @@
 
 							if($field=="name")
 							{
-								$path="modulos/files/file/";
+								$path="controlador/files/file/";
 								
 								if(!isset($events_id)) 
 								{
@@ -173,47 +143,8 @@
 			}
 		}
 
-		public function __FILES_COPI()
-    	{    	
-			#$this->__PRINT_R($this->__FILES_DATA);
-			foreach($this->__FILES_DATA as $row=>$file)
-			{
-				$vtype			=explode("/", $file["type"]);
-				$type			=$vtype[0];				
-			}
 
-		}		
 
-		public function __SOCIAL_NETWORKS($url, $file_id)
-    	{    	
-			$aux=rawurlencode($url);
-			$url=rawurlencode("http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id");
-						
-			$return="";
-
-			$return.="<a href=\"https://www.facebook.com/dialog/share?
-			app_id=1984430411957885
-			&display=popup
-			&href=$aux"."&type=custom_url&app_absent=0\" target=\"_blank\">
-				<img width=\"40\" src=\"../../sitio_web/img/facebook.svg\">";
-
-			$return.="<a href=\"https://twitter.com/intent/tweet?url=$url\" target=\"_blank\">
-				<img width=\"40\" src=\"../../sitio_web/img/twiter.jpg\">";
-
-			$return.="<a href=\"https://api.whatsapp.com/send/?text=$url\" target=\"_blank\">
-				<img width=\"45\" src=\"../../sitio_web/img/WhatsApp.png\">";		
-
-			$return.="<a href=\"https://www.pinterest.com/pin/create/button/?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
-				<img width=\"40\" src=\"../../sitio_web/img/pinterest.png\">";
-
-			$return.="<a href=\"https://www.reddit.com/submit?url=$url"."&type=custom_url&app_absent=0\" target=\"_blank\">
-				<img width=\"40\" src=\"../../sitio_web/img/reddit.png\">";
-
-			$return.="<a class=\"acortador\" title=\"http://" . $_SERVER["SERVER_NAME"] . "/&abrev=$file_id\"  target=\"_blank\">
-				<img width=\"40\" src=\"../../sitio_web/img/acortador.jpg\">";
-					
-			return $return; 
-		}
 
 		public function __PROCESS_IMG($temporal)
     	{    	
@@ -267,31 +198,96 @@
 			);
 			return $return;
 		}		
-		public function __REDIMENSION($maximo, $width, $height)
-    	{    	
-			if($width > $maximo)
-			{
-				$aux	=$width;
-				$width	=$maximo;
-				$height	=($maximo * $height) / $aux;  		
-			}			
-			if($height>$maximo)
-			{
-				$aux	=$height;
-				$height	=$maximo;
-				$width	=($maximo * $width) / $aux;  		
-			}
-			return array(round($height), round($width));
-		}		
 
 
 		##############################################################################		 		
 		public function __BROWSE()
-    	{    	
-			#$this->words["html_cargar_title"]			="";
-			#$this->words["html_cargar_description"]	="";
-    	}		
-		##############################################################################		 		
+    	{
+			$this->words["html_cargar_title"]		="";
+			$this->words["html_cargar_description"]	="";
+
+			$files_image				=array("png","jpeg","jpg");
+			$files_video				=array("mp4");
+
+			$return			="";
+			$user_ids		="";
+			$usuarios		=array();
+
+			$where			="";
+			if($_REQUEST["class"]!="Chilaquil")
+				$where			=" AND type='{$_REQUEST["class"]}'";
+
+			$comando_sql	="
+				SELECT *, 
+					e.id as event_id 
+				FROM 
+					events e JOIN 
+					user u ON e.user_id=u.id 				
+				WHERE 1=1
+					$where
+				ORDER by e.id DESC
+			";
+			
+			$events=$this->__EXECUTE($comando_sql);
+
+			foreach($events as $id =>$row)
+			{
+				$comando_sql	="
+					SELECT * FROM files
+					WHERE event_id='" . $row["event_id"]. "'
+					ORDER BY RAND()
+					LIMIT 5
+				";
+				$files=$this->__EXECUTE($comando_sql);
+
+				$title="";
+				if($row["title"]!="")		
+				{
+					$title					="<h4>{$row["title"]}</h4>";
+
+					$title_url				=str_replace(" ", "_", $row["title"]);   
+					$title_url				=urlencode($title_url);
+					$title_url				=str_replace("%", "_", $title_url);
+					$title_url				=str_replace("/", "_", $title_url);					
+				}
+				else	$title_url			="Evento";
+
+				$archivos					=count($files);
+
+				if($archivos>2)				$archivos=3;
+				else if($archivos==0)		$archivos=1;	
+
+				$words_perfil				=$this->__PERFIL_DATA($row);
+
+				$words_event=array(
+					"events_perfil"			=>$this->__VIEW_BASE("perfil_header", $words_perfil),					
+					"events_photos"			=>$this->__VIEW_BASE("galeria_fotos/galeria_fotos_" . random_int(1, $archivos), $words_perfil),															
+					"events_title"			=>$title,
+					"events_title_url"		=>$title_url,
+					"events_description"	=>$row["description"],
+				);				
+
+				$paths=array();
+				$rows=1;
+				foreach($files as $file)
+				{
+					$path									="../../controlador/files/file/";
+					$archivo 								=$path . "file_" . md5($file["id"]) . ".";
+
+					$words_event["events_id"] 				=md5($row["event_id"]);					
+					$words_event["file$rows"] 				=md5($file["id"]);	
+					
+					if(in_array($file["extension"], $files_image))
+						$words_event["archivo".$rows]		="<img src=\"$archivo{$file["extension"]}\" width=\"100%\">";							
+					if(in_array($file["extension"], $files_video))
+						$words_event["archivo".$rows]		="<img class=\"video\" src=\"$archivo"."jpg\" width=\"100%\">";						
+					$rows++;
+				}
+
+				$return	.=$this->__VIEW_BASE("contenido", $words_event);
+			}
+			return $return;
+		}		##############################################################################		 		
 		public function __SAVE()
     	{
     	}    	
@@ -329,8 +325,6 @@
 			if(is_object($this->OPHP_conexion)) 
 			{
 				$resultado	= @$this->OPHP_conexion->query($comando_sql);
-
-				
 				
 				if(isset($this->OPHP_conexion->error)  AND $this->OPHP_conexion->error!="")
 				{					
@@ -349,7 +343,6 @@
 				if(isset($option["echo"]) )
 					echo "<div class=\"echo\" style=\"display:none;\" title=\"Coneccion\">Error en la conecion</div>";
 			}	
-
 						
 			if(is_object(@$resultado)) 
 			{			
