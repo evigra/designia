@@ -51,7 +51,7 @@
 				$return	="";	
 				foreach($files as $id =>$file)
 				{
-					$path="controlador/files/file/";
+					$path="files/";
 					$md5_file=md5($file["file_id"]);
 
 					$archivo 	="";

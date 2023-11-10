@@ -60,7 +60,7 @@
 
 							if($field=="name")
 							{
-								$path="controlador/files/file/";
+								$path="files/";
 								
 								if(!isset($events_id)) 
 								{
@@ -271,7 +271,7 @@
 				$rows=1;
 				foreach($files as $file)
 				{
-					$path									="../../controlador/files/file/";
+					$path									="../../files/";
 					$archivo 								=$path . "file_" . md5($file["id"]) . ".";
 
 					$words_event["events_id"] 				=md5($row["event_id"]);					
